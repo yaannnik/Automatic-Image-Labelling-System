@@ -1,6 +1,6 @@
 _BASE_: "../Base-RCNN-FPN.yaml"
 MODEL:
-  WEIGHTS: "/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/Final Project/base_model/detectron2/tools/output/model_final.pth"
+  WEIGHTS: ""
   MASK_ON: False
   RESNETS:
     DEPTH: 18
