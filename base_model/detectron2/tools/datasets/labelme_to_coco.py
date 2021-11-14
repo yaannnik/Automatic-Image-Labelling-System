@@ -85,7 +85,7 @@ class labelme2coco(object):
  
     def annotation(self, points, label, num):
         annotation = {}
-        annotation['segmentation'] = [list(np.asarray(points).flatten())+[0.0, 0.0]] 
+        annotation['segmentation'] = [list(np.asarray(points).flatten())+[1.0, 1.0]] 
         annotation['iscrowd'] = 0
         annotation['image_id'] = num + 1
         # annotation['bbox'] = str(self.getbbox(points)) 
@@ -155,5 +155,5 @@ class labelme2coco(object):
         json.dump(self.data_coco, open(self.save_json_path, 'w'), indent=4, cls=MyEncoder)
  
  
-labelme_json = glob.glob(sys.path[0] + '/./coco/mask_train/*.json') 
-labelme2coco(labelme_json, sys.path[0] + '/./coco/annotations/coco_mask_train.json')
+labelme_json = glob.glob(sys.path[0] + '/./coco/mask_eval/*.json') 
+labelme2coco(labelme_json, sys.path[0] + '/./coco/annotations/coco_mask_eval.json')
