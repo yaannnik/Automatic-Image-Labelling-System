@@ -3,9 +3,18 @@ from flask import Flask, jsonify
 from flask import abort
 from flask import request
 import json
+import sys
+
+from utils import run, PredictionCase
+from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
 app = Flask(__name__)
-dataset_path = "C:/Users/22470/PycharmProjects/backend/annotations/"
+app_config = {"host": "127.0.0.1", "port": "5000"}
+dataset_path = sys.path[0] + "/../tools/dataset/coco/mask_train/"
+
+imgs = []
+model = sys.path[0] + "/../models/model_final34.pth"
+config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
 
 def getpoints(points):
     p0 = points[0]
@@ -24,26 +33,24 @@ def getpath(url):
 def postData():
     annos = []
     data = request.get_json()
-    url = data["url"]
-    photo = url.split("/")[12]
-    photo = photo.split(".")[0]
-    photo_json = dataset_path + photo + '.json'
-    with open(photo_json, 'r', encoding='UTF-8') as f:
-        load_dict = json.load(f)
-    annotation = data["annotation"]
-    anno = annotation[0]
-    label = anno["category"]
-    bbox = anno["bbox"]
-    point = [bbox[0], bbox[3]]
-    load_dict["shapes"][0]["points"] = point
-    with open(photo_json, 'w') as f:
-        json.dump(load_dict, f)
-    print(load_dict)
-    return jsonify(1)
+    imgs.append(data["url"])
+
+    cases = run(imgs, model, config_file)
+
+    case_dict = {"url": data["url"], "annotation": []}
+
+    for case in cases[0]:
+        anno = {}
+        anno["category"] = COCO_CATEGORIES[case.category]["name"]
+        anno["bbox"] = case.bbox
+        anno["confidence"] = case.confidence
+
+        case_dict["annotation"].append(anno)
+
+    return jsonify(case_dict)
 
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
-    url = request.args.get(url)
     # postForm = request.get_json()  # 前端传来数据
     # url = postForm["url"]
     # photo_json = getpath(url)
@@ -61,18 +68,25 @@ def getData():
     # retdata["url"] = url
     # retdata["annotation"] = annotation
 
-    return jsonify(url)
+    # return jsonify(retdata)
+    res = {}
+    res["result"] = "successfully"
+    return jsonify(res)
 
 @app.route('/train', methods=['GET'])
 def train():
     """train()
 
     return jsonify(train done)"""
+    pass
 
 @app.route('/add', methods=['GET'])
 def addPicture():
     """add(picture)
 
     return jsonify(load_dict)"""
+    pass
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(**app_config)

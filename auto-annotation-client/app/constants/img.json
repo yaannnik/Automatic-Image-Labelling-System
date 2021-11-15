@@ -1,0 +1,6 @@
+{
+  "cat":"/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/cat.jpg",
+  "dog": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/dog.jpg",
+  "tigger": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/tigger.jpg",
+  "hold": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/default.jpg"
+}

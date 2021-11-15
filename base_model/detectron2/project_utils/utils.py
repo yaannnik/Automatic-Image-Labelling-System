@@ -149,8 +149,8 @@ def run(imgs, model, config_file):
 
 
 if __name__ == "__main__":
-    imgs = ["/Users/yangyi/Downloads/WechatIMG463.jpeg"]
-    model = "detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl"
-    config_file = sys.path[0]+"/../configs/COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
+    imgs = ["/Users/yangyi/Downloads/WechatIMG471.jpeg"]
+    model = sys.path[0] + "/../models/model_final34.pth"
+    config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
 
     res = run(imgs, model, config_file)
