@@ -12,7 +12,7 @@ import tqdm
 from detectron2.config import get_cfg
 from detectron2.data.detection_utils import read_image
 from detectron2.utils.logger import setup_logger
-from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES_BAK
+from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
 from predictor import VisualizationHelper
 
@@ -36,12 +36,12 @@ class PredictionCase:
         return self.bbox
 
     def __str__(self):
-        return "<Object: " + COCO_CATEGORIES_BAK[self.category]["name"] + ";\n"\
+        return "<Object: " + COCO_CATEGORIES[self.category]["name"] + ";\n"\
                           + "score: " + str(self.confidence) + ";\n"\
                           + "bbox: " + str(self.bbox) + ">\n"
     
     def __repr__(self):
-        return "<Object: " + COCO_CATEGORIES_BAK[self.category]["name"] + ";\n" \
+        return "<Object: " + COCO_CATEGORIES[self.category]["name"] + ";\n" \
                           + "score: " + str(self.confidence) + ";\n" \
                           + "bbox: " + str(self.bbox) + ">\n"
 
@@ -56,6 +56,14 @@ def predImages(imgs, vis):
     for img in imgs:
         data = read_image(img)
         start_time = time.time()
+
+        height = int(data.shape[0])
+        width = int(data.shape[1])
+        scalar = max(width, height)
+        height = int(height / scalar * 256)
+        width = int(width / scalar * 256)
+        dim = (width, height)
+        data = cv2.resize(data, dim, interpolation = cv2.INTER_AREA)
 
         predictions, visualized_output = vis.run_on_image(data)
         preds.append((img, predictions))

@@ -4,6 +4,7 @@ import glob
 import multiprocessing as mp
 import numpy as np
 import os
+import sys
 import tempfile
 import time
 import warnings
@@ -29,11 +30,12 @@ def setup_cfg(args):
     cfg.merge_from_file(args.config_file)
     cfg.merge_from_list(args.opts)
     # Set score_threshold for builtin models
-    cfg.MODEL.RETINANET.SCORE_THRESH_TEST = args.confidence_threshold
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.confidence_threshold
-    cfg.MODEL.PANOPTIC_FPN.COMBINE.INSTANCES_CONFIDENCE_THRESH = args.confidence_threshold
+    # cfg.MODEL.RETINANET.SCORE_THRESH_TEST = args.confidence_threshold
+    # cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.confidence_threshold
+    # cfg.MODEL.PANOPTIC_FPN.COMBINE.INSTANCES_CONFIDENCE_THRESH = args.confidence_threshold
 
     cfg.MODEL.DEVICE = "cpu"
+    cfg.MODEL.WEIGHTS = sys.path[0] + "/../models/model_final34.pth"
     cfg.freeze()
     return cfg
 
@@ -110,6 +112,15 @@ if __name__ == "__main__":
         for path in tqdm.tqdm(args.input, disable=not args.output):
             # use PIL, to be consistent with evaluation
             img = read_image(path, format="BGR")
+            
+            height = int(img.shape[0])
+            width = int(img.shape[1])
+            scalar = max(width, height)
+            height = int(height / scalar * 256)
+            width = int(width / scalar * 256)
+            dim = (width, height)
+            img = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+
             start_time = time.time()
             predictions, visualized_output = demo.run_on_image(img)
             logger.info(
