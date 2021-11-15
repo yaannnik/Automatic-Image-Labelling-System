@@ -43,24 +43,25 @@ def postData():
 
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
-    postForm = request.get_json()  # 前端传来数据
-    url = postForm["url"]
-    photo_json = getpath(url)
-    with open(photo_json, 'r', encoding='UTF-8') as f:
-        load_dict = json.load(f)
-    retdata = {}
-    annotation = []
-    anno = {}
-    shapes = load_dict["shapes"][0]
-    points = shapes["points"]
-    anno["bbox"] = getpoints(points)
-    anno["category"] = shapes["label"]
-    anno["confidence"] = 0
-    annotation.append(anno)
-    retdata["url"] = url
-    retdata["annotation"] = annotation
+    url = request.args.get(url)
+    # postForm = request.get_json()  # 前端传来数据
+    # url = postForm["url"]
+    # photo_json = getpath(url)
+    # with open(photo_json, 'r', encoding='UTF-8') as f:
+    #     load_dict = json.load(f)
+    # retdata = {}
+    # annotation = []
+    # anno = {}
+    # shapes = load_dict["shapes"][0]
+    # points = shapes["points"]
+    # anno["bbox"] = getpoints(points)
+    # anno["category"] = shapes["label"]
+    # anno["confidence"] = 0
+    # annotation.append(anno)
+    # retdata["url"] = url
+    # retdata["annotation"] = annotation
 
-    return jsonify(retdata)
+    return jsonify(url)
 
 @app.route('/train', methods=['GET'])
 def train():
