@@ -1,6 +1,6 @@
 {
-  "cat":"/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/cat.jpg",
-  "dog": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/dog.jpg",
-  "tigger": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/tigger.jpg",
-  "hold": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/default.jpg"
+  "mask1": "Images/WechatIMG856.jpeg",
+  "mask2": "Images/WechatIMG471.jpeg",
+  "mask3": "Images/WechatIMG509.jpeg",
+  "hold": "Images/WechatIMG887.jpeg"
 }

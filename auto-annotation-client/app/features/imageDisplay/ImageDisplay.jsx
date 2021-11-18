@@ -18,6 +18,9 @@ import * as imgSrc from '../../constants/img.json';
 import mockImageData from '../../data/mockImageData';
 import AppData from '../../dataStructure/AppData';
 
+// back end api service
+import ImgService from '../../utils/getService';
+
 
 export default function AppIcon(props: {
   imgData: []
@@ -36,15 +39,18 @@ export default function AppIcon(props: {
     setAnnotation(mockImageData());
     log.info(mockImageData());
     setImgUpdated(new ImgItem(imgUrl, mockImageData()));
-    const response = axios.get('http://localhost:5000/get', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      params: { url: imgUrl }
+    const service = new ImgService();
+    log.info(imgUrl);
+    const rsp = service.getImage({ url: imgUrl });
+    log.info(rsp);
+    rsp.then((response) => {
+      imgUpdated.url = response.data.url;
+      setImgUpdated(imgUpdated);
     })
     .then((response) => {
-      log.info(response);
+      imgUpdated.annotation = response.data.Annotations;
+      setImgUpdated(imgUpdated);
+      log.info(response.data.Annotations)
     })
     .catch((error) => {
       log.info(error);
@@ -102,7 +108,7 @@ export default function AppIcon(props: {
                     Confidence: {imgUpdated.confidence}
                   </Grid.Column>
                 </Item.Header> */}
-                <Item.Description>
+                {/* <Item.Description>
                   <Placeholder>
                     <Placeholder.Paragraph>
                       <Placeholder.Line />
@@ -111,7 +117,7 @@ export default function AppIcon(props: {
                       <Placeholder.Line />
                     </Placeholder.Paragraph>
                   </Placeholder>
-                </Item.Description>
+                </Item.Description> */}
                 <Item.Extra>
                   <Input type="text" onChange={onInputChange} />
                   <Button
