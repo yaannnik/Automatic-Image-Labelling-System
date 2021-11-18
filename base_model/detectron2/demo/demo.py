@@ -18,7 +18,7 @@ from detectron2.utils.logger import setup_logger
 from predictor import VisualizationDemo
 
 # constants
-WINDOW_NAME = "COCO detections"
+WINDOW_NAME = "Final Project"
 
 
 def setup_cfg(args):

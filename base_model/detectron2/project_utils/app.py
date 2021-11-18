@@ -10,7 +10,7 @@ from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
 app = Flask(__name__)
 app_config = {"host": "127.0.0.1", "port": "5000"}
-dataset_path = sys.path[0] + "/../tools/dataset/coco/mask_train/"
+dataset_path = sys.path[0] + "/../tools/datasets/coco/test_train/"
 
 imgs = []
 model = sys.path[0] + "/../models/model_final34.pth"
@@ -24,7 +24,7 @@ def getpoints(points):
     return [p0, p1, p2, p3]
 
 def getpath(url):
-    photo = url.split("/")[12]
+    photo = url.split("/")[-1]
     photo = photo.split(".")[0]
     photo_json = dataset_path + photo + '.json'
     return photo_json
@@ -33,11 +33,42 @@ def getpath(url):
 def postData():
     annos = []
     data = request.get_json()
-    imgs.append(data["url"])
+    updated_data = json.loads(data["data"])  # image options updated by client
+    url = updated_data["url"]
+    print(url)
+
+    photo_json = getpath(url)
+    # with open(photo_json, 'r', encoding='UTF-8') as f:
+    #     load_dict = json.load(f)
+    retdata = {}
+    annotation = []
+    anno = {}
+    # shapes = load_dict["shapes"][0]
+    # points = shapes["points"]
+    # anno["bbox"] = getpoints(points)
+    # anno["category"] = shapes["label"]
+    # anno["confidence"] = 0
+    # annotation.append(anno)
+    retdata["url"] = url
+    # retdata["annotation"] = annotation
+
+    with open(photo_json, 'w', encoding='UTF-8') as f:
+        json.dump(retdata, f)
+
+    return jsonify(retdata)
+    
+
+@app.route('/get', methods=['GET'])  #前端获取训练数据
+def getData():
+    url = request.args.get("url")  # image url uploaded by
+    annos = []
+    data = request.get_json()
+    imgs = []
+    imgs.append(url)
 
     cases = run(imgs, model, config_file)
 
-    case_dict = {"url": data["url"], "annotation": []}
+    case_dict = {"url": url, "annotation": []}
 
     for case in cases[0]:
         anno = {}
@@ -49,29 +80,6 @@ def postData():
 
     return jsonify(case_dict)
 
-@app.route('/get', methods=['GET'])  #前端获取训练数据
-def getData():
-    # postForm = request.get_json()  # 前端传来数据
-    # url = postForm["url"]
-    # photo_json = getpath(url)
-    # with open(photo_json, 'r', encoding='UTF-8') as f:
-    #     load_dict = json.load(f)
-    # retdata = {}
-    # annotation = []
-    # anno = {}
-    # shapes = load_dict["shapes"][0]
-    # points = shapes["points"]
-    # anno["bbox"] = getpoints(points)
-    # anno["category"] = shapes["label"]
-    # anno["confidence"] = 0
-    # annotation.append(anno)
-    # retdata["url"] = url
-    # retdata["annotation"] = annotation
-
-    # return jsonify(retdata)
-    res = {}
-    res["result"] = "successfully"
-    return jsonify(res)
 
 @app.route('/train', methods=['GET'])
 def train():
