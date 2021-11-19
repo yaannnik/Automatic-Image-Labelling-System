@@ -61,6 +61,8 @@ def postData():
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
     url = request.args.get("url")  # image url uploaded by
+    print("HERE!!!")
+    print(url)
     annos = []
     data = request.get_json()
     imgs = []
@@ -75,8 +77,9 @@ def getData():
         anno["category"] = COCO_CATEGORIES[case.category]["name"]
         anno["bbox"] = case.bbox
         anno["confidence"] = case.confidence
-
+        case_dict["url"] = case.url
         case_dict["annotation"].append(anno)
+    print(case_dict)
 
     return jsonify(case_dict)
 

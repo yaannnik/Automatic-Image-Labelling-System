@@ -54,7 +54,7 @@ def predImages(imgs, vis):
     preds = []
 
     for img in imgs:
-        data = read_image(img)
+        data = read_image(img, "BGR")
         start_time = time.time()
 
         height = int(data.shape[0])
@@ -66,7 +66,19 @@ def predImages(imgs, vis):
         data = cv2.resize(data, dim, interpolation = cv2.INTER_AREA)
 
         predictions, visualized_output = vis.run_on_image(data)
-        preds.append((img, predictions))
+
+        img_label = img.split("/")[-1]
+        img_label = img_label.split(".")[0]
+        img_label = "/Users/yangyi/Downloads/" + img_label + '-1.jpeg'
+        print(img_label)
+        # cv2.namedWindow("WINDOW_NAME", cv2.WINDOW_NORMAL)
+        # cv2.imshow("WINDOW_NAME", visualized_output.get_image()[:, :, ::-1])
+        # if cv2.waitKey(0) == 27:
+        #     break  # esc to quit
+        cv2.imwrite(img_label, visualized_output.get_image()[:, :, ::-1])
+
+        # img: url of the image
+        preds.append((img_label, predictions))
 
         logger = setup_logger()
         logger.info(
@@ -149,7 +161,7 @@ def run(imgs, model, config_file):
 
 
 if __name__ == "__main__":
-    imgs = ["/Users/yangyi/Downloads/WechatIMG471.jpeg"]
+    imgs = ["/Users/yangyi/Downloads/WechatIMG512.jpeg"]
     model = sys.path[0] + "/../models/model_final34.pth"
     config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
 
