@@ -1,0 +1,21 @@
+{
+  "version": "4.5.9",
+  "flags": {},
+  "shapes": [],
+  "imagePath": "WechatIMG512-1.jpeg",
+  "imageData": "Encoded",
+  "imageHeight": 162,
+  "imageWidth": 256,
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ]
+}

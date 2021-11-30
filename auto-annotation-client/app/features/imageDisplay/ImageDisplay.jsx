@@ -77,19 +77,29 @@ export default function AppIcon(props: {
     imgData.push(imgUpdated);
     const data = JSON.stringify(imgUpdated);
     // TODO: upload with HTTP POST here
-    const response = axios.post('http://localhost:5000/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data
-    })
-    .then((response) => {
-      log.info(response);
-    })
-    .catch((error) => {
-      log.info(error);
-    });
+
+    const service = new ImgService();
+    log.info(imgUrl);
+    const rsp = service.postAnnotation({ data: data });
+    rsp.then((response) => {
+        log.info(response);
+      })
+      .catch((error) => {
+        log.info(error);
+      });
+    // const response = axios.post('http://localhost:5000/post', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   data:data
+    // })
+    // .then((response) => {
+    //   log.info(response);
+    // })
+    // .catch((error) => {
+    //   log.info(error);
+    // });
   };
   return (
     <div>

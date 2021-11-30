@@ -59,7 +59,7 @@ def postData():
                "flags": {}}
         retdata["shapes"].append(rec)
 
-    with open(dataset_path+photo_json, 'w', encoding='UTF-8') as fp:
+    with open(photo_json, 'w', encoding='UTF-8') as fp:
         json.dump(retdata, fp, indent=2)
 
     return jsonify(retdata)

@@ -1,3 +1,9 @@
+import sys
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+
 from flask import Flask
 from werkzeug.utils import redirect
 
@@ -58,6 +64,7 @@ def login():
 
     if user and check_password_hash(user.password, password):
         # 登陆成功将用户信息添加到session信息中去
+        print('yes')
         session['user'] = user.name
         session['id'] = user.id
 

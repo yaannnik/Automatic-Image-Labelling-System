@@ -1,0 +1,1064 @@
+[11/29 20:19:56] detectron2 INFO: Rank of current process: 0. World size: 1
+[11/29 20:19:56] detectron2 INFO: Environment info:
+---------------------  ----------------------------------------------------------------------------------------------------------------------------------------
+sys.platform           darwin
+Python                 3.8.12 (default, Oct 12 2021, 06:23:56) [Clang 10.0.0 ]
+numpy                  1.21.2
+detectron2             0.6 @/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/auto-annotation-server/base_model/detectron2/detectron2
+Compiler               clang 13.0.0
+CUDA compiler          not available
+DETECTRON2_ENV_MODULE  <not set>
+PyTorch                1.10.0 @/Users/yangyi/opt/anaconda3/envs/pytorch/lib/python3.8/site-packages/torch
+PyTorch debug build    False
+GPU available          No: torch.cuda.is_available() == False
+Pillow                 8.4.0
+torchvision            0.11.1 @/Users/yangyi/opt/anaconda3/envs/pytorch/lib/python3.8/site-packages/torchvision
+fvcore                 0.1.5.post20211023
+iopath                 0.1.9
+cv2                    4.5.4-dev
+---------------------  ----------------------------------------------------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 4.2
+  - C++ Version: 201402
+  - clang 12.0.0
+  - Intel(R) oneAPI Math Kernel Library Version 2021.3-Product Build 20210617 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.2.3 (Git Hash 7336ca9f055cf1bfa13efb658fe15dc9b41f0740)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CXX_COMPILER=/Applications/Xcode-12.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -Wno-deprecated-declarations -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -Wno-invalid-partial-specialization -Wno-typedef-redefinition -Wno-unknown-warning-option -Wno-unused-private-field -Wno-inconsistent-missing-override -Wno-aligned-allocation-unavailable -Wno-c++14-extensions -Wno-constexpr-not-const -Wno-missing-braces -Qunused-arguments -fcolor-diagnostics -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-unused-private-field -Wno-missing-braces -Wno-c++14-extensions -Wno-constexpr-not-const, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=OFF, 
+
+[11/29 20:19:56] detectron2 INFO: Command line arguments: Namespace(config_file='../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml', dist_url='tcp://127.0.0.1:49653', eval_only=False, machine_rank=0, num_gpus=1, num_machines=1, opts=[], resume=False)
+[11/29 20:19:57] detectron2 INFO: Contents of args.config_file=../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml:
+[38;5;197m_BASE_[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m../Base-RCNN-FPN.yaml[39m[38;5;186m"[39m
+[38;5;197mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39mFalse
+[38;5;15m  [39m[38;5;197mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m18
+[38;5;15m    [39m[38;5;197mRES2_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m  [39m[38;5;197mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.8
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;197mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m8
+[38;5;15m  [39m[38;5;197mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m0.0002
+[38;5;15m  [39m[38;5;197mSTEPS[39m[38;5;15m:[39m[38;5;15m [39m(40000, 42000)
+[38;5;15m  [39m[38;5;197mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m45000
+[38;5;197mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m(0, 256)
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN_SAMPLING[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mrange[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m1280
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mRANDOM_FLIP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mnone[39m[38;5;186m"[39m
+
+[11/29 20:19:57] detectron2 INFO: Running with full config:
+[38;5;197mCUDNN_BENCHMARK[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;197mDATALOADER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mASPECT_RATIO_GROUPING[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m  [39m[38;5;197mFILTER_EMPTY_ANNOTATIONS[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m  [39m[38;5;197mNUM_WORKERS[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m  [39m[38;5;197mREPEAT_THRESHOLD[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m  [39m[38;5;197mSAMPLER_TRAIN[39m[38;5;15m:[39m[38;5;15m [39mTrainingSampler
+[38;5;197mDATASETS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mPRECOMPUTED_PROPOSAL_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mPRECOMPUTED_PROPOSAL_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m2000
+[38;5;15m  [39m[38;5;197mPROPOSAL_FILES_TEST[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mPROPOSAL_FILES_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39mcoco_mask_val
+[38;5;15m  [39m[38;5;197mTRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39mcoco_mask_train
+[38;5;197mGLOBAL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mHACK[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;197mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mCROP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mSIZE[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.9
+[38;5;15m    [39m-[38;5;15m [39m0.9
+[38;5;15m    [39m[38;5;197mTYPE[39m[38;5;15m:[39m[38;5;15m [39mrelative_range
+[38;5;15m  [39m[38;5;197mFORMAT[39m[38;5;15m:[39m[38;5;15m [39mBGR
+[38;5;15m  [39m[38;5;197mMASK_FORMAT[39m[38;5;15m:[39m[38;5;15m [39mpolygon
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m1280
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m0
+[38;5;15m  [39m-[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN_SAMPLING[39m[38;5;15m:[39m[38;5;15m [39mrange
+[38;5;15m  [39m[38;5;197mRANDOM_FLIP[39m[38;5;15m:[39m[38;5;15m [39mnone
+[38;5;197mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mANCHOR_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mANGLES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m-90
+[38;5;15m      [39m-[38;5;15m [39m0
+[38;5;15m      [39m-[38;5;15m [39m90
+[38;5;15m    [39m[38;5;197mASPECT_RATIOS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m0.5
+[38;5;15m      [39m-[38;5;15m [39m1.0
+[38;5;15m      [39m-[38;5;15m [39m2.0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mDefaultAnchorGenerator
+[38;5;15m    [39m[38;5;197mOFFSET[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m    [39m[38;5;197mSIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m32
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m64
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m128
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m256
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m512
+[38;5;15m  [39m[38;5;197mBACKBONE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mFREEZE_AT[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mbuild_resnet_fpn_backbone
+[38;5;15m  [39m[38;5;197mDEVICE[39m[38;5;15m:[39m[38;5;15m [39mcpu
+[38;5;15m  [39m[38;5;197mFPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mFUSE_TYPE[39m[38;5;15m:[39m[38;5;15m [39msum
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mres2
+[38;5;15m    [39m-[38;5;15m [39mres3
+[38;5;15m    [39m-[38;5;15m [39mres4
+[38;5;15m    [39m-[38;5;15m [39mres5
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mOUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mKEYPOINT_ON[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mLOAD_PROPOSALS[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mMETA_ARCHITECTURE[39m[38;5;15m:[39m[38;5;15m [39mGeneralizedRCNN
+[38;5;15m  [39m[38;5;197mPANOPTIC_FPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCOMBINE[39m[38;5;15m:[39m
+[38;5;15m      [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m      [39m[38;5;197mINSTANCES_CONFIDENCE_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m      [39m[38;5;197mOVERLAP_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m      [39m[38;5;197mSTUFF_AREA_LIMIT[39m[38;5;15m:[39m[38;5;15m [39m4096
+[38;5;15m    [39m[38;5;197mINSTANCE_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mPIXEL_MEAN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m103.53
+[38;5;15m  [39m-[38;5;15m [39m116.28
+[38;5;15m  [39m-[38;5;15m [39m123.675
+[38;5;15m  [39m[38;5;197mPIXEL_STD[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mPROPOSAL_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mMIN_SIZE[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mRPN
+[38;5;15m  [39m[38;5;197mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mDEFORM_MODULATED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mDEFORM_NUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mDEFORM_ON_PER_STAGE[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m18
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39mFrozenBN
+[38;5;15m    [39m[38;5;197mNUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mOUT_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mres2
+[38;5;15m    [39m-[38;5;15m [39mres3
+[38;5;15m    [39m-[38;5;15m [39mres4
+[38;5;15m    [39m-[38;5;15m [39mres5
+[38;5;15m    [39m[38;5;197mRES2_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m    [39m[38;5;197mRES5_DILATION[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mSTEM_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m    [39m[38;5;197mSTRIDE_IN_1X1[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mWIDTH_PER_GROUP[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m  [39m[38;5;197mRETINANET[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m&id002[39m
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mFOCAL_LOSS_ALPHA[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mFOCAL_LOSS_GAMMA[39m[38;5;15m:[39m[38;5;15m [39m2.0
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m-[38;5;15m [39mp6
+[38;5;15m    [39m-[38;5;15m [39mp7
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.4
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m80
+[38;5;15m    [39m[38;5;197mNUM_CONVS[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mPRIOR_PROB[39m[38;5;15m:[39m[38;5;15m [39m0.01
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.05
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_LOSS_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.1
+[38;5;15m    [39m[38;5;197mTOPK_CANDIDATES_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mROI_BOX_CASCADE_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m[38;5;15m&id001[39m
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m5.0
+[38;5;15m      [39m-[38;5;15m [39m5.0
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m20.0
+[38;5;15m      [39m-[38;5;15m [39m20.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m30.0
+[38;5;15m      [39m-[38;5;15m [39m30.0
+[38;5;15m      [39m-[38;5;15m [39m15.0
+[38;5;15m      [39m-[38;5;15m [39m15.0
+[38;5;15m    [39m[38;5;197mIOUS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m-[38;5;15m [39m0.6
+[38;5;15m    [39m-[38;5;15m [39m0.7
+[38;5;15m  [39m[38;5;197mROI_BOX_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id001[39m
+[38;5;15m    [39m[38;5;197mCLS_AGNOSTIC_BBOX_REG[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mFC_DIM[39m[38;5;15m:[39m[38;5;15m [39m1024
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mFastRCNNConvFCHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mNUM_FC[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m7
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m    [39m[38;5;197mTRAIN_ON_PRED_BOXES[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m512
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mStandardROIHeads
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mPROPOSAL_APPEND_GT[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.8
+[38;5;15m  [39m[38;5;197mROI_KEYPOINT_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mMIN_KEYPOINTS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mKRCNNConvDeconvUpsampleHead
+[38;5;15m    [39m[38;5;197mNORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mNUM_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39m17
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m14
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m  [39m[38;5;197mROI_MASK_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCLS_AGNOSTIC_MASK[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mMaskRCNNConvUpsampleHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m14
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m  [39m[38;5;197mRPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id002[39m
+[38;5;15m    [39m[38;5;197mBOUNDARY_THRESH[39m[38;5;15m:[39m[38;5;15m [39m-1
+[38;5;15m    [39m[38;5;197mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m[38;5;197mHEAD_NAME[39m[38;5;15m:[39m[38;5;15m [39mStandardRPNHead
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m-[38;5;15m [39mp6
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.3
+[38;5;15m    [39m-[38;5;15m [39m0.7
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mNMS_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.7
+[38;5;15m    [39m[38;5;197mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mPOST_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPOST_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPRE_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPRE_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m2000
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m  [39m[38;5;197mSEM_SEG_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCOMMON_STRIDE[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mCONVS_DIM[39m[38;5;15m:[39m[38;5;15m [39m128
+[38;5;15m    [39m[38;5;197mIGNORE_VALUE[39m[38;5;15m:[39m[38;5;15m [39m255
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mSemSegFPNHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39mGN
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m54
+[38;5;15m  [39m[38;5;197mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;197mOUTPUT_DIR[39m[38;5;15m:[39m[38;5;15m [39m./output
+[38;5;197mSEED[39m[38;5;15m:[39m[38;5;15m [39m-1
+[38;5;197mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mAMP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m0.0002
+[38;5;15m  [39m[38;5;197mBIAS_LR_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mCHECKPOINT_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m5000
+[38;5;15m  [39m[38;5;197mCLIP_GRADIENTS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCLIP_TYPE[39m[38;5;15m:[39m[38;5;15m [39mvalue
+[38;5;15m    [39m[38;5;197mCLIP_VALUE[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mNORM_TYPE[39m[38;5;15m:[39m[38;5;15m [39m2.0
+[38;5;15m  [39m[38;5;197mGAMMA[39m[38;5;15m:[39m[38;5;15m [39m0.1
+[38;5;15m  [39m[38;5;197mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m8
+[38;5;15m  [39m[38;5;197mLR_SCHEDULER_NAME[39m[38;5;15m:[39m[38;5;15m [39mWarmupMultiStepLR
+[38;5;15m  [39m[38;5;197mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m45000
+[38;5;15m  [39m[38;5;197mMOMENTUM[39m[38;5;15m:[39m[38;5;15m [39m0.9
+[38;5;15m  [39m[38;5;197mNESTEROV[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mREFERENCE_WORLD_SIZE[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mSTEPS[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m40000
+[38;5;15m  [39m-[38;5;15m [39m42000
+[38;5;15m  [39m[38;5;197mWARMUP_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m0.001
+[38;5;15m  [39m[38;5;197mWARMUP_ITERS[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mWARMUP_METHOD[39m[38;5;15m:[39m[38;5;15m [39mlinear
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY[39m[38;5;15m:[39m[38;5;15m [39m0.0001
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY_BIAS[39m[38;5;15m:[39m[38;5;15m [39mnull
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY_NORM[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mAUG[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mFLIP[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mMAX_SIZE[39m[38;5;15m:[39m[38;5;15m [39m4000
+[38;5;15m    [39m[38;5;197mMIN_SIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m400
+[38;5;15m    [39m-[38;5;15m [39m500
+[38;5;15m    [39m-[38;5;15m [39m600
+[38;5;15m    [39m-[38;5;15m [39m700
+[38;5;15m    [39m-[38;5;15m [39m800
+[38;5;15m    [39m-[38;5;15m [39m900
+[38;5;15m    [39m-[38;5;15m [39m1000
+[38;5;15m    [39m-[38;5;15m [39m1100
+[38;5;15m    [39m-[38;5;15m [39m1200
+[38;5;15m  [39m[38;5;197mDETECTIONS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m100
+[38;5;15m  [39m[38;5;197mEVAL_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mEXPECTED_RESULTS[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mKEYPOINT_OKS_SIGMAS[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mPRECISE_BN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mNUM_ITER[39m[38;5;15m:[39m[38;5;15m [39m200
+[38;5;197mVERSION[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;197mVIS_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m0
+
+[11/29 20:19:57] detectron2 INFO: Full config saved to ./output/config.yaml
+[11/29 20:19:57] d2.utils.env INFO: Using a generated random seed 57256747
+[11/29 20:19:57] d2.engine.defaults INFO: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+  )
+  (roi_heads): StandardROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (box_head): FastRCNNConvFCHead(
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+      (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+      (fc_relu1): ReLU()
+      (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      (fc_relu2): ReLU()
+    )
+    (box_predictor): FastRCNNOutputLayers(
+      (cls_score): Linear(in_features=1024, out_features=3, bias=True)
+      (bbox_pred): Linear(in_features=1024, out_features=8, bias=True)
+    )
+  )
+)
+[11/29 20:35:52] detectron2 INFO: Rank of current process: 0. World size: 1
+[11/29 20:35:52] detectron2 INFO: Environment info:
+---------------------  ----------------------------------------------------------------------------------------------------------------------------------------
+sys.platform           darwin
+Python                 3.8.12 (default, Oct 12 2021, 06:23:56) [Clang 10.0.0 ]
+numpy                  1.21.2
+detectron2             0.6 @/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/auto-annotation-server/base_model/detectron2/detectron2
+Compiler               clang 13.0.0
+CUDA compiler          not available
+DETECTRON2_ENV_MODULE  <not set>
+PyTorch                1.10.0 @/Users/yangyi/opt/anaconda3/envs/pytorch/lib/python3.8/site-packages/torch
+PyTorch debug build    False
+GPU available          No: torch.cuda.is_available() == False
+Pillow                 8.4.0
+torchvision            0.11.1 @/Users/yangyi/opt/anaconda3/envs/pytorch/lib/python3.8/site-packages/torchvision
+fvcore                 0.1.5.post20211023
+iopath                 0.1.9
+cv2                    4.5.4-dev
+---------------------  ----------------------------------------------------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 4.2
+  - C++ Version: 201402
+  - clang 12.0.0
+  - Intel(R) oneAPI Math Kernel Library Version 2021.3-Product Build 20210617 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.2.3 (Git Hash 7336ca9f055cf1bfa13efb658fe15dc9b41f0740)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CXX_COMPILER=/Applications/Xcode-12.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -Wno-deprecated-declarations -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -Wno-invalid-partial-specialization -Wno-typedef-redefinition -Wno-unknown-warning-option -Wno-unused-private-field -Wno-inconsistent-missing-override -Wno-aligned-allocation-unavailable -Wno-c++14-extensions -Wno-constexpr-not-const -Wno-missing-braces -Qunused-arguments -fcolor-diagnostics -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-unused-private-field -Wno-missing-braces -Wno-c++14-extensions -Wno-constexpr-not-const, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=OFF, 
+
+[11/29 20:35:52] detectron2 INFO: Command line arguments: Namespace(config_file='../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml', dist_url='tcp://127.0.0.1:49653', eval_only=False, machine_rank=0, num_gpus=1, num_machines=1, opts=[], resume=False)
+[11/29 20:35:52] detectron2 INFO: Contents of args.config_file=../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml:
+[38;5;197m_BASE_[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m../Base-RCNN-FPN.yaml[39m[38;5;186m"[39m
+[38;5;197mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39mFalse
+[38;5;15m  [39m[38;5;197mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m18
+[38;5;15m    [39m[38;5;197mRES2_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m  [39m[38;5;197mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.8
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;197mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m8
+[38;5;15m  [39m[38;5;197mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m0.0002
+[38;5;15m  [39m[38;5;197mSTEPS[39m[38;5;15m:[39m[38;5;15m [39m(40000, 42000)
+[38;5;15m  [39m[38;5;197mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m45000
+[38;5;197mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m(0, 256)
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN_SAMPLING[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mrange[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m1280
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mRANDOM_FLIP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mnone[39m[38;5;186m"[39m
+
+[11/29 20:35:53] detectron2 INFO: Running with full config:
+[38;5;197mCUDNN_BENCHMARK[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;197mDATALOADER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mASPECT_RATIO_GROUPING[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m  [39m[38;5;197mFILTER_EMPTY_ANNOTATIONS[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m  [39m[38;5;197mNUM_WORKERS[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m  [39m[38;5;197mREPEAT_THRESHOLD[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m  [39m[38;5;197mSAMPLER_TRAIN[39m[38;5;15m:[39m[38;5;15m [39mTrainingSampler
+[38;5;197mDATASETS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mPRECOMPUTED_PROPOSAL_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mPRECOMPUTED_PROPOSAL_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m2000
+[38;5;15m  [39m[38;5;197mPROPOSAL_FILES_TEST[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mPROPOSAL_FILES_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39mcoco_mask_val
+[38;5;15m  [39m[38;5;197mTRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39mcoco_mask_train
+[38;5;197mGLOBAL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mHACK[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;197mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mCROP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mSIZE[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.9
+[38;5;15m    [39m-[38;5;15m [39m0.9
+[38;5;15m    [39m[38;5;197mTYPE[39m[38;5;15m:[39m[38;5;15m [39mrelative_range
+[38;5;15m  [39m[38;5;197mFORMAT[39m[38;5;15m:[39m[38;5;15m [39mBGR
+[38;5;15m  [39m[38;5;197mMASK_FORMAT[39m[38;5;15m:[39m[38;5;15m [39mpolygon
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m1280
+[38;5;15m  [39m[38;5;197mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m0
+[38;5;15m  [39m-[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mMIN_SIZE_TRAIN_SAMPLING[39m[38;5;15m:[39m[38;5;15m [39mrange
+[38;5;15m  [39m[38;5;197mRANDOM_FLIP[39m[38;5;15m:[39m[38;5;15m [39mnone
+[38;5;197mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mANCHOR_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mANGLES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m-90
+[38;5;15m      [39m-[38;5;15m [39m0
+[38;5;15m      [39m-[38;5;15m [39m90
+[38;5;15m    [39m[38;5;197mASPECT_RATIOS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m0.5
+[38;5;15m      [39m-[38;5;15m [39m1.0
+[38;5;15m      [39m-[38;5;15m [39m2.0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mDefaultAnchorGenerator
+[38;5;15m    [39m[38;5;197mOFFSET[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m    [39m[38;5;197mSIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m32
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m64
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m128
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m256
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m512
+[38;5;15m  [39m[38;5;197mBACKBONE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mFREEZE_AT[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mbuild_resnet_fpn_backbone
+[38;5;15m  [39m[38;5;197mDEVICE[39m[38;5;15m:[39m[38;5;15m [39mcpu
+[38;5;15m  [39m[38;5;197mFPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mFUSE_TYPE[39m[38;5;15m:[39m[38;5;15m [39msum
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mres2
+[38;5;15m    [39m-[38;5;15m [39mres3
+[38;5;15m    [39m-[38;5;15m [39mres4
+[38;5;15m    [39m-[38;5;15m [39mres5
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mOUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m  [39m[38;5;197mKEYPOINT_ON[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mLOAD_PROPOSALS[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mMETA_ARCHITECTURE[39m[38;5;15m:[39m[38;5;15m [39mGeneralizedRCNN
+[38;5;15m  [39m[38;5;197mPANOPTIC_FPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCOMBINE[39m[38;5;15m:[39m
+[38;5;15m      [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m      [39m[38;5;197mINSTANCES_CONFIDENCE_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m      [39m[38;5;197mOVERLAP_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m      [39m[38;5;197mSTUFF_AREA_LIMIT[39m[38;5;15m:[39m[38;5;15m [39m4096
+[38;5;15m    [39m[38;5;197mINSTANCE_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mPIXEL_MEAN[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m103.53
+[38;5;15m  [39m-[38;5;15m [39m116.28
+[38;5;15m  [39m-[38;5;15m [39m123.675
+[38;5;15m  [39m[38;5;197mPIXEL_STD[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m-[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mPROPOSAL_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mMIN_SIZE[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mRPN
+[38;5;15m  [39m[38;5;197mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mDEFORM_MODULATED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mDEFORM_NUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mDEFORM_ON_PER_STAGE[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m-[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m18
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39mFrozenBN
+[38;5;15m    [39m[38;5;197mNUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mOUT_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mres2
+[38;5;15m    [39m-[38;5;15m [39mres3
+[38;5;15m    [39m-[38;5;15m [39mres4
+[38;5;15m    [39m-[38;5;15m [39mres5
+[38;5;15m    [39m[38;5;197mRES2_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m    [39m[38;5;197mRES5_DILATION[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mSTEM_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m    [39m[38;5;197mSTRIDE_IN_1X1[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mWIDTH_PER_GROUP[39m[38;5;15m:[39m[38;5;15m [39m64
+[38;5;15m  [39m[38;5;197mRETINANET[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m&id002[39m
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m-[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mFOCAL_LOSS_ALPHA[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mFOCAL_LOSS_GAMMA[39m[38;5;15m:[39m[38;5;15m [39m2.0
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m-[38;5;15m [39mp6
+[38;5;15m    [39m-[38;5;15m [39mp7
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.4
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m80
+[38;5;15m    [39m[38;5;197mNUM_CONVS[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mPRIOR_PROB[39m[38;5;15m:[39m[38;5;15m [39m0.01
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.05
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_LOSS_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.1
+[38;5;15m    [39m[38;5;197mTOPK_CANDIDATES_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mROI_BOX_CASCADE_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m[38;5;15m&id001[39m
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m5.0
+[38;5;15m      [39m-[38;5;15m [39m5.0
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m20.0
+[38;5;15m      [39m-[38;5;15m [39m20.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m      [39m-[38;5;15m [39m10.0
+[38;5;15m    [39m-[38;5;15m [39m-[38;5;15m [39m30.0
+[38;5;15m      [39m-[38;5;15m [39m30.0
+[38;5;15m      [39m-[38;5;15m [39m15.0
+[38;5;15m      [39m-[38;5;15m [39m15.0
+[38;5;15m    [39m[38;5;197mIOUS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m-[38;5;15m [39m0.6
+[38;5;15m    [39m-[38;5;15m [39m0.7
+[38;5;15m  [39m[38;5;197mROI_BOX_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id001[39m
+[38;5;15m    [39m[38;5;197mCLS_AGNOSTIC_BBOX_REG[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mFC_DIM[39m[38;5;15m:[39m[38;5;15m [39m1024
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mFastRCNNConvFCHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mNUM_FC[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m7
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m    [39m[38;5;197mTRAIN_ON_PRED_BOXES[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m512
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mStandardROIHeads
+[38;5;15m    [39m[38;5;197mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;15m    [39m[38;5;197mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m0.25
+[38;5;15m    [39m[38;5;197mPROPOSAL_APPEND_GT[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m0.8
+[38;5;15m  [39m[38;5;197mROI_KEYPOINT_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m-[38;5;15m [39m512
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mMIN_KEYPOINTS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mKRCNNConvDeconvUpsampleHead
+[38;5;15m    [39m[38;5;197mNORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mNUM_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39m17
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m14
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m  [39m[38;5;197mROI_MASK_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCLS_AGNOSTIC_MASK[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mMaskRCNNConvUpsampleHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;197mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m14
+[38;5;15m    [39m[38;5;197mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m    [39m[38;5;197mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39mROIAlignV2
+[38;5;15m  [39m[38;5;197mRPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m256
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39msmooth_l1
+[38;5;15m    [39m[38;5;197mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id002[39m
+[38;5;15m    [39m[38;5;197mBOUNDARY_THRESH[39m[38;5;15m:[39m[38;5;15m [39m-1
+[38;5;15m    [39m[38;5;197mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m[38;5;197mHEAD_NAME[39m[38;5;15m:[39m[38;5;15m [39mStandardRPNHead
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m-[38;5;15m [39mp6
+[38;5;15m    [39m[38;5;197mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0
+[38;5;15m    [39m-[38;5;15m [39m-1
+[38;5;15m    [39m-[38;5;15m [39m1
+[38;5;15m    [39m[38;5;197mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m0.3
+[38;5;15m    [39m-[38;5;15m [39m0.7
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mNMS_THRESH[39m[38;5;15m:[39m[38;5;15m [39m0.7
+[38;5;15m    [39m[38;5;197mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m0.5
+[38;5;15m    [39m[38;5;197mPOST_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPOST_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPRE_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m    [39m[38;5;197mPRE_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m2000
+[38;5;15m    [39m[38;5;197mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;15m  [39m[38;5;197mSEM_SEG_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCOMMON_STRIDE[39m[38;5;15m:[39m[38;5;15m [39m4
+[38;5;15m    [39m[38;5;197mCONVS_DIM[39m[38;5;15m:[39m[38;5;15m [39m128
+[38;5;15m    [39m[38;5;197mIGNORE_VALUE[39m[38;5;15m:[39m[38;5;15m [39m255
+[38;5;15m    [39m[38;5;197mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39mp2
+[38;5;15m    [39m-[38;5;15m [39mp3
+[38;5;15m    [39m-[38;5;15m [39mp4
+[38;5;15m    [39m-[38;5;15m [39mp5
+[38;5;15m    [39m[38;5;197mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mNAME[39m[38;5;15m:[39m[38;5;15m [39mSemSegFPNHead
+[38;5;15m    [39m[38;5;197mNORM[39m[38;5;15m:[39m[38;5;15m [39mGN
+[38;5;15m    [39m[38;5;197mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m54
+[38;5;15m  [39m[38;5;197mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;197mOUTPUT_DIR[39m[38;5;15m:[39m[38;5;15m [39m./output
+[38;5;197mSEED[39m[38;5;15m:[39m[38;5;15m [39m-1
+[38;5;197mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mAMP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m0.0002
+[38;5;15m  [39m[38;5;197mBIAS_LR_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m  [39m[38;5;197mCHECKPOINT_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m5000
+[38;5;15m  [39m[38;5;197mCLIP_GRADIENTS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mCLIP_TYPE[39m[38;5;15m:[39m[38;5;15m [39mvalue
+[38;5;15m    [39m[38;5;197mCLIP_VALUE[39m[38;5;15m:[39m[38;5;15m [39m1.0
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mNORM_TYPE[39m[38;5;15m:[39m[38;5;15m [39m2.0
+[38;5;15m  [39m[38;5;197mGAMMA[39m[38;5;15m:[39m[38;5;15m [39m0.1
+[38;5;15m  [39m[38;5;197mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m8
+[38;5;15m  [39m[38;5;197mLR_SCHEDULER_NAME[39m[38;5;15m:[39m[38;5;15m [39mWarmupMultiStepLR
+[38;5;15m  [39m[38;5;197mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m45000
+[38;5;15m  [39m[38;5;197mMOMENTUM[39m[38;5;15m:[39m[38;5;15m [39m0.9
+[38;5;15m  [39m[38;5;197mNESTEROV[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m  [39m[38;5;197mREFERENCE_WORLD_SIZE[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mSTEPS[39m[38;5;15m:[39m
+[38;5;15m  [39m-[38;5;15m [39m40000
+[38;5;15m  [39m-[38;5;15m [39m42000
+[38;5;15m  [39m[38;5;197mWARMUP_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m0.001
+[38;5;15m  [39m[38;5;197mWARMUP_ITERS[39m[38;5;15m:[39m[38;5;15m [39m1000
+[38;5;15m  [39m[38;5;197mWARMUP_METHOD[39m[38;5;15m:[39m[38;5;15m [39mlinear
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY[39m[38;5;15m:[39m[38;5;15m [39m0.0001
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY_BIAS[39m[38;5;15m:[39m[38;5;15m [39mnull
+[38;5;15m  [39m[38;5;197mWEIGHT_DECAY_NORM[39m[38;5;15m:[39m[38;5;15m [39m0.0
+[38;5;197mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;197mAUG[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mFLIP[39m[38;5;15m:[39m[38;5;15m [39mtrue
+[38;5;15m    [39m[38;5;197mMAX_SIZE[39m[38;5;15m:[39m[38;5;15m [39m4000
+[38;5;15m    [39m[38;5;197mMIN_SIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m-[38;5;15m [39m400
+[38;5;15m    [39m-[38;5;15m [39m500
+[38;5;15m    [39m-[38;5;15m [39m600
+[38;5;15m    [39m-[38;5;15m [39m700
+[38;5;15m    [39m-[38;5;15m [39m800
+[38;5;15m    [39m-[38;5;15m [39m900
+[38;5;15m    [39m-[38;5;15m [39m1000
+[38;5;15m    [39m-[38;5;15m [39m1100
+[38;5;15m    [39m-[38;5;15m [39m1200
+[38;5;15m  [39m[38;5;197mDETECTIONS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m100
+[38;5;15m  [39m[38;5;197mEVAL_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m0
+[38;5;15m  [39m[38;5;197mEXPECTED_RESULTS[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mKEYPOINT_OKS_SIGMAS[39m[38;5;15m:[39m[38;5;15m [39m[]
+[38;5;15m  [39m[38;5;197mPRECISE_BN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;197mENABLED[39m[38;5;15m:[39m[38;5;15m [39mfalse
+[38;5;15m    [39m[38;5;197mNUM_ITER[39m[38;5;15m:[39m[38;5;15m [39m200
+[38;5;197mVERSION[39m[38;5;15m:[39m[38;5;15m [39m2
+[38;5;197mVIS_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m0
+
+[11/29 20:35:53] detectron2 INFO: Full config saved to ./output/config.yaml
+[11/29 20:35:53] d2.utils.env INFO: Using a generated random seed 53229251
+[11/29 20:35:53] d2.engine.defaults INFO: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BasicBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+  )
+  (roi_heads): StandardROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (box_head): FastRCNNConvFCHead(
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+      (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+      (fc_relu1): ReLU()
+      (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      (fc_relu2): ReLU()
+    )
+    (box_predictor): FastRCNNOutputLayers(
+      (cls_score): Linear(in_features=1024, out_features=3, bias=True)
+      (bbox_pred): Linear(in_features=1024, out_features=8, bias=True)
+    )
+  )
+)
