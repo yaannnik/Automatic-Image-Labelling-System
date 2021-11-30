@@ -35,25 +35,32 @@ def postData():
     data = request.get_json()
     updated_data = json.loads(data["data"])  # image options updated by client
     url = updated_data["url"]
+    annotations = updated_data["annotation"]
     print(url)
 
     photo_json = getpath(url)
-    # with open(photo_json, 'r', encoding='UTF-8') as f:
-    #     load_dict = json.load(f)
-    retdata = {}
-    annotation = []
-    anno = {}
-    # shapes = load_dict["shapes"][0]
-    # points = shapes["points"]
-    # anno["bbox"] = getpoints(points)
-    # anno["category"] = shapes["label"]
-    # anno["confidence"] = 0
-    # annotation.append(anno)
-    retdata["url"] = url
-    # retdata["annotation"] = annotation
 
-    with open(photo_json, 'w', encoding='UTF-8') as f:
-        json.dump(retdata, f)
+    retdata = {"version": "4.5.9", 
+               "flags": {}, 
+               "shapes": [], 
+               "imagePath": url.split("/")[-1], 
+               "imageData": "Encoded", 
+               "imageHeight": 162,
+               "imageWidth": 256, 
+               "lineColor": [0, 255, 0, 128], 
+               "fillColor": [255, 0, 0, 128]}
+    for anno in annotations:
+        rec = {"line_color": None,
+               "fill_color": None,
+               "label": "mask",
+               "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
+               "group_id": None,
+               "shape_type": "rectangle",
+               "flags": {}}
+        retdata["shapes"].append(rec)
+
+    with open(dataset_path+photo_json, 'w', encoding='UTF-8') as fp:
+        json.dump(retdata, fp, indent=2)
 
     return jsonify(retdata)
     
@@ -61,8 +68,8 @@ def postData():
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
     url = request.args.get("url")  # image url uploaded by
-    print("HERE!!!")
-    print(url)
+    # print("HERE!!!")
+    # print(url)
     annos = []
     data = request.get_json()
     imgs = []
