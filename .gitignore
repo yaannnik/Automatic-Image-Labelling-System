@@ -1,0 +1,7 @@
+**/.DS_Store
+**/.idea
+**/.vscode
+**/__pycache__
+**/.ipynb_checkpoints
+/raw_data
+**/*.pth

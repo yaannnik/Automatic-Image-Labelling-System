@@ -1,0 +1,20 @@
+{
+  "url": "/Users/joanna/Desktop/CU/Courses/6893_big_data_analytics/project/auto-annotation-client/app/example/mockImage/cat.jpg",
+  "annotation": [
+    {
+      "category": "cat",
+      "bbox": [0, 1, 2, 3],
+      "confidence": 0.8
+    },
+    {
+      "category": "dog",
+      "bbox": [0, 3, 2, 3],
+      "confidence": 0.7
+    },
+    {
+      "category": "bird",
+      "bbox": [2, 4, 4, 7],
+      "confidence": 0.6
+    }
+  ]
+}
