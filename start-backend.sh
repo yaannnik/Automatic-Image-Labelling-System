@@ -1,3 +1,3 @@
 conda activate pytorch
-cd base_model/detectron2/project_utils
+cd auto-annotation-server/apps
 python app.py
