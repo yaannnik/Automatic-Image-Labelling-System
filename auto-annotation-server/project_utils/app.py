@@ -31,12 +31,13 @@ def getpath(url):
 
 @app.route('/post', methods=['POST'])  #前端返回标注结果
 def postData():
-    annos = []
     data = request.get_json()
     updated_data = json.loads(data["data"])  # image options updated by client
+    print(updated_data)
     url = updated_data["url"]
     annotations = updated_data["annotation"]
-    print("url:", url)
+    print("url: ", url)
+    print("annotations:", annotations)
 
     photo_json = getpath(url)
 
@@ -49,15 +50,16 @@ def postData():
                "imageWidth": 256, 
                "lineColor": [0, 255, 0, 128], 
                "fillColor": [255, 0, 0, 128]}
+
     for anno in annotations:
-        rec = {"line_color": None,
+        shape = {"line_color": None,
                "fill_color": None,
-               "label": "mask",
+               "label": anno["category"],
                "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
                "group_id": None,
                "shape_type": "rectangle",
                "flags": {}}
-        retdata["shapes"].append(rec)
+        retdata["shapes"].append(shape)
 
     with open(photo_json, 'w', encoding='UTF-8') as fp:
         json.dump(retdata, fp, indent=2)
@@ -68,10 +70,10 @@ def postData():
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
     url = request.args.get("url")  # image url uploaded by
-    print(request.get_json())
-    print(url)
-    annos = []
-    data = request.get_json()
+    # print(request.get_json())
+    # print(url)
+    # annos = []
+    # data = request.get_json()
     imgs = []
     imgs.append(url)
 

@@ -20,6 +20,7 @@ import AppData from '../../dataStructure/AppData';
 
 // back end api service
 import ImgService from '../../utils/getService';
+import AnnotationItem from '../../dataStructure/AnnotationItem';
 
 
 export default function AppIcon(props: {
@@ -36,7 +37,7 @@ export default function AppIcon(props: {
     log.info(imgUrl);
     // setImgUpdated(new ImgItem(imgUrl, []));
     // TODO: replace mock data with HTTP post
-    setAnnotation(mockImageData());
+    //setAnnotation(mockImageData());
     log.info(mockImageData());
     setImgUpdated(new ImgItem(imgUrl, mockImageData()));
     const service = new ImgService();
@@ -45,12 +46,11 @@ export default function AppIcon(props: {
     log.info(rsp);
     rsp.then((response) => {
       imgUpdated.url = response.data.url;
+      const annotationNew = response.data.annotation[0];
+      imgUpdated.annotation = [new AnnotationItem(annotationNew.category, annotationNew.bbox, annotationNew.confidence)];
+      log.info(imgUpdated.annotation)
+      setAnnotation(imgUpdated.annotation);
       setImgUpdated(imgUpdated);
-    })
-    .then((response) => {
-      imgUpdated.annotation = response.data.Annotations;
-      setImgUpdated(imgUpdated);
-      log.info(response.data.Annotations)
     })
     .catch((error) => {
       log.info(error);
@@ -73,7 +73,7 @@ export default function AppIcon(props: {
   const onSubmitChange = () => {
     log.info('change img', imgUpdated);
     log.info('whole data changed: ', imgData);
-    imgUpdated.Annotations = imgAnnotation;
+    imgUpdated.annotation = imgAnnotation;
     imgData.push(imgUpdated);
     const data = JSON.stringify(imgUpdated);
     // TODO: upload with HTTP POST here
