@@ -69,7 +69,7 @@ def predImages(imgs, vis):
 
         img_label = img.split("/")[-1]
         img_label = img_label.split(".")[0]
-        img_label = "/Users/yangyi/Downloads/" + img_label + '-1.jpeg'
+        img_label = sys.path[0] + "/../cache/" + img_label + '-1.jpeg'
         print(img_label)
         # cv2.namedWindow("WINDOW_NAME", cv2.WINDOW_NORMAL)
         # cv2.imshow("WINDOW_NAME", visualized_output.get_image()[:, :, ::-1])
@@ -161,7 +161,7 @@ def run(imgs, model, config_file):
 
 
 if __name__ == "__main__":
-    imgs = ["/Users/yangyi/Downloads/WechatIMG512.jpeg"]
+    imgs = ["../cache/WechatIMG512.jpeg"]
     model = sys.path[0] + "/../models/model_final34.pth"
     config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
 
