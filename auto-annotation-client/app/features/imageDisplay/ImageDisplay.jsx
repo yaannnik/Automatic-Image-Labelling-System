@@ -27,6 +27,7 @@ import ImageUpload from './ImageUpload';
 // back end api service
 import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
+import AnnotationDisplay from './AnnotationDisplay';
 
 export default function AppIcon(props: { imgData: [] }) {
   // connection between front end and back end
@@ -90,31 +91,29 @@ export default function AppIcon(props: { imgData: [] }) {
   return (
     <div>
       {/* <h1> Image Upload </h1> */}
-      <Label as='a' size='huge' color='green' tag>
-        Image Upload
-      </Label>
+
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column>
+            <Label as="a" size="huge" color="green" tag>
+              Image Upload
+            </Label>
+            <p> </p>
             <Grid.Row>
               <Image
                 src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
+                centered
               />
             </Grid.Row>
+            <Grid.Column>
+              {imgAnnotation.map((annotation) => (
+                <AnnotationDisplay
+                  annotation={annotation}
+                />
+              ))}
+            </Grid.Column>
             <Grid.Row>
               <ImageUpload onUploadClick={onUploadClick} setImgUrl={setImgUrl} />
-              {/* <Input
-                    type="text"
-                    onChange={onInputChange}
-                  />
-                  <Button
-                    positive
-                    floated="right"
-                    onClick={() => onUploadClick()}
-                  >
-                    <Icon name="arrow alternate circle up" />
-                    Upload
-                  </Button> */}
             </Grid.Row>
           </Grid.Column>
           <Grid.Column>

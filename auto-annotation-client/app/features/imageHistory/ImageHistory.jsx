@@ -34,7 +34,9 @@ export default function TagCategoryPage(props: any) {
 
   return (
     <div>
-      <h1> Revised annotation history </h1>
+      <Label as="a" size="huge" color="green" tag>
+        Revised history
+      </Label>
       <Item.Group items={items} />
     </div>
   );
