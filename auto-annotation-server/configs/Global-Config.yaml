@@ -1,0 +1,3 @@
+model_path: "/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/auto-annotation-server/models/model_final34.pth"
+dataset_path: "/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/auto-annotation-server/detectron2/tools/datasets/coco/test_train/"
+config_file: "/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/auto-annotation-server/configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"

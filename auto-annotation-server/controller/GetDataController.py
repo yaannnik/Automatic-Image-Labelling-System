@@ -9,6 +9,9 @@ from dao import db
 from entity.User import User
 import json
 
+from apps.utils import run, PredictionCase
+from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
+
 from dao import app
 
 
@@ -21,10 +24,7 @@ def getData():
     name = session['user']
     user = User.query.filter_by(name=name).first()
     url = request.args.get("url")  # image url uploaded by
-    print("HERE!!!")
-    print(url)
-    annos = []
-    data = request.get_json()
+
     imgs = []
     imgs.append(url)
 
@@ -40,4 +40,5 @@ def getData():
         case_dict["url"] = case.url
         case_dict["annotation"].append(anno)
     print(case_dict)
+
     return jsonify(case_dict)

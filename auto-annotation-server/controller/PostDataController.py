@@ -26,29 +26,37 @@ def getpath(url):
 
 @app.route('/post', methods=['POST'])  #前端返回标注结果
 def postData():
-    annos = []
     data = request.get_json()
-    #updated_data = json.loads(data["data"])  # image options updated by client
-    url = data["url"]
-    print(url)
+    updated_data = json.loads(data["data"])  # image options updated by client
+    print(updated_data)
+    url = updated_data["url"]
+    annotations = updated_data["annotation"]
+    print("url: ", url)
+    print("annotations:", annotations)
 
     photo_json = getpath(url)
-    print(photo_json)
-    # with open(photo_json, 'r', encoding='UTF-8') as f:
-    #     load_dict = json.load(f)
-    retdata = {}
-    annotation = []
-    anno = {}
-    # shapes = load_dict["shapes"][0]
-    # points = shapes["points"]
-    # anno["bbox"] = getpoints(points)
-    # anno["category"] = shapes["label"]
-    # anno["confidence"] = 0
-    # annotation.append(anno)
-    retdata["url"] = url
-    # retdata["annotation"] = annotation
 
-    with open(photo_json, 'w', encoding='UTF-8') as f:
-        json.dump(retdata, f)
+    retdata = {"version": "4.5.9", 
+               "flags": {}, 
+               "shapes": [], 
+               "imagePath": url.split("/")[-1], 
+               "imageData": "Encoded", 
+               "imageHeight": 162,
+               "imageWidth": 256, 
+               "lineColor": [0, 255, 0, 128], 
+               "fillColor": [255, 0, 0, 128]}
+
+    for anno in annotations:
+        shape = {"line_color": None,
+               "fill_color": None,
+               "label": anno["category"],
+               "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
+               "group_id": None,
+               "shape_type": "rectangle",
+               "flags": {}}
+        retdata["shapes"].append(shape)
+
+    with open(photo_json, 'w', encoding='UTF-8') as fp:
+        json.dump(retdata, fp, indent=2)
 
     return jsonify(retdata)
