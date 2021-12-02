@@ -86,19 +86,6 @@ export default function AppIcon(props: { imgData: [] }) {
       .catch(error => {
         log.info(error);
       });
-    // const response = axios.post('http://localhost:5000/post', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   data:data
-    // })
-    // .then((response) => {
-    //   log.info(response);
-    // })
-    // .catch((error) => {
-    //   log.info(error);
-    // });
   };
   return (
     <div>
