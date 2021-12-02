@@ -2,7 +2,13 @@
 import log from 'electron-log';
 // react and semantic ui framework
 import React, { useState } from 'react';
-import { Item, Button, Icon, Input, Placeholder, Grid } from 'semantic-ui-react';
+import {
+  Item,
+  Button,
+  Icon,
+  Input,
+  Grid
+} from 'semantic-ui-react';
 // TODO: internal component
 import ImageOperation from '../imageOperations/ImageOperation';
 // import uploadButton from './uploadButton';
@@ -10,22 +16,19 @@ import ImageOperation from '../imageOperations/ImageOperation';
 // data structure
 import ImgItem from '../../dataStructure/ImgItem';
 
-import axios from 'axios';
 // constants
 import * as imgSrc from '../../constants/img.json';
 
 // TODO: replace mockData for image item
 import mockImageData from '../../data/mockImageData';
-import AppData from '../../dataStructure/AppData';
 
+// internal component
+import ImageUpload from './ImageUpload';
 // back end api service
 import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
 
-
-export default function AppIcon(props: {
-  imgData: []
-}) {
+export default function AppIcon(props: { imgData: [] }) {
   // connection between front end and back end
   const { imgData } = props;
   const [imgUrl, setImgUrl] = useState('');
@@ -37,37 +40,32 @@ export default function AppIcon(props: {
     log.info(imgUrl);
     // setImgUpdated(new ImgItem(imgUrl, []));
     // TODO: replace mock data with HTTP post
-    //setAnnotation(mockImageData());
+    // setAnnotation(mockImageData());
     log.info(mockImageData());
     setImgUpdated(new ImgItem(imgUrl, mockImageData()));
     const service = new ImgService();
-    log.info(imgUrl);
     const rsp = service.getImage({ url: imgUrl });
     log.info(rsp);
-    rsp.then((response) => {
-      imgUpdated.url = response.data.url;
-      const annotationNew = response.data.annotation[0];
-      imgUpdated.annotation = [new AnnotationItem(annotationNew.category, annotationNew.bbox, annotationNew.confidence)];
-      log.info(imgUpdated.annotation)
-      setAnnotation(imgUpdated.annotation);
-      setImgUpdated(imgUpdated);
-    })
-    .catch((error) => {
-      log.info(error);
-    });
-    // log.info(response);
-    // if (response.ok) {
-    //   console.log('it worked');
-    // }
-    // axios.get('http://localhost:3000/example')
-    // .then(function (response) {
-    //   log.info(response);
-    // })
-    // .catch(function (error) {
-    //   log.info(error);
-    // });
+    rsp
+      .then(response => {
+        imgUpdated.url = response.data.url;
+        const annotationNew = response.data.annotation[0];
+        imgUpdated.annotation = [
+          new AnnotationItem(
+            annotationNew.category,
+            annotationNew.bbox,
+            annotationNew.confidence
+          )
+        ];
+        log.info(imgUpdated.annotation);
+        setAnnotation(imgUpdated.annotation);
+        setImgUpdated(imgUpdated);
+      })
+      .catch(error => {
+        log.info(error);
+      });
   };
-  const onInputChange = (e) => {
+  const onInputChange = e => {
     setImgUrl(e.target.value);
   };
   const onSubmitChange = () => {
@@ -80,11 +78,12 @@ export default function AppIcon(props: {
 
     const service = new ImgService();
     log.info(imgUrl);
-    const rsp = service.postAnnotation({ data: data });
-    rsp.then((response) => {
+    const rsp = service.postAnnotation({ data });
+    rsp
+      .then(response => {
         log.info(response);
       })
-      .catch((error) => {
+      .catch(error => {
         log.info(error);
       });
     // const response = axios.post('http://localhost:5000/post', {
@@ -108,28 +107,17 @@ export default function AppIcon(props: {
         <Grid.Row>
           <Grid.Column>
             <Item>
-              <Item.Image size="large" src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url} />
+              <Item.Image
+                size="large"
+                src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
+              />
               <Item.Content verticalAlign="middle">
-                {/* <Item.Header>
-                  <Grid.Column>
-                    Category: {imgUpdated.category}
-                  </Grid.Column>
-                  <Grid.Column>
-                    Confidence: {imgUpdated.confidence}
-                  </Grid.Column>
-                </Item.Header> */}
-                {/* <Item.Description>
-                  <Placeholder>
-                    <Placeholder.Paragraph>
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                      <Placeholder.Line />
-                    </Placeholder.Paragraph>
-                  </Placeholder>
-                </Item.Description> */}
                 <Item.Extra>
-                  <Input type="text" onChange={onInputChange} />
+                  <ImageUpload onUploadClick={onUploadClick} setImgUrl = {setImgUrl}/>
+                  {/* <Input
+                    type="text"
+                    onChange={onInputChange}
+                  />
                   <Button
                     positive
                     floated="right"
@@ -137,7 +125,7 @@ export default function AppIcon(props: {
                   >
                     <Icon name="arrow alternate circle up" />
                     Upload
-                  </Button>
+                  </Button> */}
                 </Item.Extra>
               </Item.Content>
             </Item>
@@ -155,7 +143,6 @@ export default function AppIcon(props: {
           </Button>
         </Grid.Row>
       </Grid>
-
     </div>
   );
 }
