@@ -70,22 +70,20 @@ export default function AddAnnotation(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <Grid.Column computer={6}>
-          <Label size="large" pointing="right" color="green">Choose a category: mask/unmask</Label>
-        </Grid.Column>
-        <Grid.Column computer={10}>
-          <Dropdown
-            placeholder="Choose an category"
-            fluid
-            selection
-            clearable
-            options={categoryOptions}
-            onChange={categoryChange} />
-        </Grid.Column>
+        <Label size="large" color="green">Choose a category: mask/unmask</Label>
+      </Grid.Row>
+      <Grid.Row>
+        <Dropdown
+          placeholder="Choose an category"
+          fluid
+          selection
+          clearable
+          options={categoryOptions}
+          onChange={categoryChange} />
       </Grid.Row>
       <Grid.Row>
         {/* <h1> Add bounding box </h1> */}
-        <Label size="large" pointing="right" color="green">Add bounding box</Label>
+        <Label size="large" color="green">Add bounding box</Label>
         <br />
       </Grid.Row>
       <Grid.Row>
