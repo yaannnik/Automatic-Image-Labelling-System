@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import {
   Item,
   Button,
-  Icon,
-  Input,
+  Label,
+  Image,
   Grid
 } from 'semantic-ui-react';
 // TODO: internal component
@@ -89,19 +89,21 @@ export default function AppIcon(props: { imgData: [] }) {
   };
   return (
     <div>
-      <h1> Image Upload </h1>
+      {/* <h1> Image Upload </h1> */}
+      <Label as='a' size='huge' color='green' tag>
+        Image Upload
+      </Label>
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column>
-            <Item>
-              <Item.Image
-                size="large"
+            <Grid.Row>
+              <Image
                 src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
               />
-              <Item.Content verticalAlign="middle">
-                <Item.Extra>
-                  <ImageUpload onUploadClick={onUploadClick} setImgUrl = {setImgUrl}/>
-                  {/* <Input
+            </Grid.Row>
+            <Grid.Row>
+              <ImageUpload onUploadClick={onUploadClick} setImgUrl={setImgUrl} />
+              {/* <Input
                     type="text"
                     onChange={onInputChange}
                   />
@@ -113,9 +115,7 @@ export default function AppIcon(props: { imgData: [] }) {
                     <Icon name="arrow alternate circle up" />
                     Upload
                   </Button> */}
-                </Item.Extra>
-              </Item.Content>
-            </Item>
+            </Grid.Row>
           </Grid.Column>
           <Grid.Column>
             <ImageOperation

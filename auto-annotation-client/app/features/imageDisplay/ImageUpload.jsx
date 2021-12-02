@@ -7,6 +7,7 @@ import {
   Tab,
   Message,
   Icon,
+  Grid,
   Form
 } from 'semantic-ui-react';
 import { put } from 'axios';
@@ -43,28 +44,38 @@ export default class ImageUpload extends Component {
             <Message>{file === undefined || file === null ? 'Nothing' : file.name} selected</Message>
             <Form onSubmit={this.onFormSubmit}>
               <Form.Field>
-                <Button
-                  content="Choose File"
-                  labelPosition="left"
-                  icon="file"
-                  onClick={() => this.fileInputRef.current.click()}
-                />
-                <input
-                  ref={this.fileInputRef}
-                  type="file"
-                  hidden
-                  onChange={this.fileChange}
-                />
-                <Button
-                  positive
-                  floated="right"
-                  onClick={() => this.props.onUploadClick()}
-                  disabled={file === undefined || file === null}
+                <Grid columns={2}>
+                  <Grid.Column computer={8}>
+                    <Button
+                      positive
+                      floated="left"
+                      onClick={() => this.fileInputRef.current.click()}
+                    >
+                      <Icon name="file" />
+                      Open
+                    </Button>
+                    <input
+                      ref={this.fileInputRef}
+                      type="file"
+                      hidden
+                      onChange={this.fileChange}
+                    />
+                  </Grid.Column>
 
-                >
-                  <Icon name="arrow alternate circle up" />
-                  Upload
-                </Button>
+                  <Grid.Column computer={8}>
+                    <Button
+                      positive
+                      floated="right"
+                      onClick={() => this.props.onUploadClick()}
+                      disabled={file === undefined || file === null}
+
+                    >
+                      <Icon name="arrow alternate circle up" />
+                      Upload
+                    </Button>
+
+                  </Grid.Column>
+                </Grid>
               </Form.Field>
 
             </Form>
