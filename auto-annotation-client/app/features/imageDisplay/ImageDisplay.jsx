@@ -91,13 +91,14 @@ export default function AppIcon(props: { imgData: [] }) {
   return (
     <div>
       {/* <h1> Image Upload </h1> */}
-      <Label as='a' size='huge' color='green' tag>
-        Image Upload
-      </Label>
-      <p> </p>
+
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column>
+            <Label as="a" size="huge" color="green" tag>
+              Image Upload
+            </Label>
+            <p> </p>
             <Grid.Row>
               <Image
                 src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}

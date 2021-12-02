@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { Grid, Dropdown } from 'semantic-ui-react';
+import { Grid, Dropdown, Label } from 'semantic-ui-react';
 import log from 'electron-log';
 
 // internal component
@@ -17,7 +17,7 @@ type MyDropdown = {
   value: number
 };
 
-export default function ImageOperation(props: { Annotations: AnnotationItem[], canEdit: boolean}) {
+export default function ImageOperation(props: { Annotations: AnnotationItem[], canEdit: boolean }) {
   const { Annotations, canEdit } = props;
   const [option, setOption] = useState(-1);  // specify options on annotation: add, delete or update
   // -----------component data here --------------
@@ -64,7 +64,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
     );
   };
 
-    // handle changes on annotation
+  // handle changes on annotation
   const addAnnoation = (imgItem: AnnotationItem) => {
     if (imgItem.confidence !== -1) {
       log.info('add new annotation: ', imgItem);
@@ -101,7 +101,11 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
   return (
     <Grid columns={2} padded="vertically">
       <Grid.Row>
-        <h1>Annotation Options</h1>
+        <Label as="a" size="huge" color="green" tag>
+          Annotation Options
+        </Label>
+      </Grid.Row>
+      <Grid.Row>
         <Dropdown
           selectOnBlur={false}
           scrolling
@@ -114,9 +118,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
           clearable
         />
       </Grid.Row>
-      <Grid.Row>
         <AnnotationOptionComponent />
-      </Grid.Row>
     </Grid>
   );
 }
