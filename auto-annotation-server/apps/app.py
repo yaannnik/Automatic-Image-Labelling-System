@@ -2,6 +2,8 @@ from flask import Flask
 from flask import Flask, jsonify
 from flask import abort
 from flask import request
+
+import yaml
 import json
 import sys
 
@@ -10,11 +12,19 @@ from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
 app = Flask(__name__)
 app_config = {"host": "127.0.0.1", "port": "5000"}
-dataset_path = sys.path[0] + "/../detectron2/tools/datasets/coco/test_train/"
 
 imgs = []
-model = sys.path[0] + "/../models/model_final34.pth"
-config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
+
+with open(sys.path[0] + "/../configs/Global-Config.yaml", 'r') as fp:
+    global_cfg = yaml.load(fp.read(), Loader=yaml.Loader)
+
+model = global_cfg["model_path"]
+dataset_path = global_cfg["dataset_path"]
+config_file = global_cfg["config_file"]
+
+# model = sys.path[0] + "/../models/model_final34.pth"
+# dataset_path = sys.path[0] + "/../detectron2/tools/datasets/coco/test_train/"
+# config_file = sys.path[0] + "/../configs/COCO-Detection/faster_rcnn_R_34_FPN_3x.yaml"
 
 def getpoints(points):
     p0 = points[0]
