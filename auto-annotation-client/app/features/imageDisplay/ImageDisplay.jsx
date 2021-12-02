@@ -104,13 +104,13 @@ export default function AppIcon(props: { imgData: [] }) {
                 centered
               />
             </Grid.Row>
-              <Grid.Column>
+            <Grid.Column>
               {imgAnnotation.map((annotation) => (
                 <AnnotationDisplay
                   annotation={annotation}
                 />
               ))}
-              </Grid.Column>
+            </Grid.Column>
             <Grid.Row>
               <ImageUpload onUploadClick={onUploadClick} setImgUrl={setImgUrl} />
             </Grid.Row>
