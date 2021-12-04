@@ -33,16 +33,6 @@ export default function AddAnnotation(props: {
     },
   ];
   // -----------listening port here --------------
-  // listen change on input for category
-  const onChangeCategory = (e) => {
-    setInputCategory(e.target.value);
-  };
-  const onSubmitCategory = () => {
-    log.info('change category');
-    log.info(inputCategory);
-    annotationSelected.category = inputCategory;
-    setAnnotationSelected(annotationSelected);
-  };
   // listen change on input for bounding box
   const onChangeUpperX = (e) => {
     setInputUpperX(e.target.value);
