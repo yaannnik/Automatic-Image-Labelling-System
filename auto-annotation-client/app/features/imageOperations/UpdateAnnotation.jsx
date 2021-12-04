@@ -32,19 +32,19 @@ export default function UpdateAnnotation(props: {
       text: `${annotation.category} | ${annotation.bbox}`,
       value: annotation,
     }));
-    // ----------dropdown options here--------------
-    const categoryOptions = [
-      {
-        key: 'mask',
-        text: 'mask',
-        value: 'mask',
-      },
-      {
-        key: 'unmask',
-        text: 'unmask',
-        value: 'unmask',
-      },
-    ];
+  // ----------dropdown options here--------------
+  const categoryOptions = [
+    {
+      key: 'mask',
+      text: 'mask',
+      value: 'mask',
+    },
+    {
+      key: 'unmask',
+      text: 'unmask',
+      value: 'unmask',
+    },
+  ];
   const OnObjectChange = (e, { value }) => {
     log.info('select annotation:', value);
     setAnnotationSelected(value);
@@ -76,7 +76,9 @@ export default function UpdateAnnotation(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <h1>Change annotation</h1>
+        <h1>Change an annotation</h1>
+      </Grid.Row>
+      <Grid.Row>
         <Dropdown
           selectOnBlur={false}
           scrolling
