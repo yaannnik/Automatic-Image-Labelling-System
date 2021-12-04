@@ -60,7 +60,9 @@ export default function AddAnnotation(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <h1>Add annotation</h1>
+        <h1>Add an annotation</h1>
+      </Grid.Row>
+      <Grid.Row>
         <Label size="large" color="green">Choose a category: mask/unmask</Label>
       </Grid.Row>
       <Grid.Row>
