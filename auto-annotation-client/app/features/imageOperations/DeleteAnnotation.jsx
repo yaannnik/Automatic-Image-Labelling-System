@@ -42,9 +42,11 @@ export default function DeleteAnnotaion(props: {
     setAnnotationSelected(value);
   };
   return (
-    <Grid columns={2} padded="vertically">
+    <Grid padded="vertically">
       <Grid.Row>
-        <h1>Delete annotation</h1>
+        <h1>Delete an annotation</h1>
+      </Grid.Row>
+      <Grid.Row>
         <Dropdown
           selectOnBlur={false}
           scrolling
