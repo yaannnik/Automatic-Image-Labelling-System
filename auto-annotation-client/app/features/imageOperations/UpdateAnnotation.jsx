@@ -74,7 +74,7 @@ export default function UpdateAnnotation(props: {
     setAnnotationSelected(annotationSelected);
   };
   return (
-    <Grid columns={2} padded="vertically">
+    <Grid padded="vertically">
       <Grid.Row>
         <h1>Change annotation</h1>
         <Dropdown
