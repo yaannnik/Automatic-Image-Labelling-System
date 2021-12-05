@@ -24,6 +24,7 @@ import mockImageData from '../../data/mockImageData';
 
 // internal component
 import ImageUpload from './ImageUpload';
+import ImageHistory from '../imageHistory/ImageHistory';
 // back end api service
 import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
@@ -75,8 +76,6 @@ export default function AppIcon(props: { imgData: [] }) {
     imgUpdated.annotation = imgAnnotation;
     imgData.push(imgUpdated);
     const data = JSON.stringify(imgUpdated);
-    // TODO: upload with HTTP POST here
-
     const service = new ImgService();
     log.info(imgUrl);
     const rsp = service.postAnnotation({ data });
@@ -91,43 +90,51 @@ export default function AppIcon(props: { imgData: [] }) {
   return (
     <div>
       {/* <h1> Image Upload </h1> */}
-
       <Grid columns={2} divided>
-        <Grid.Row>
-          <Grid.Column>
-            <Label as="a" size="huge" color="green" tag>
-              Image Upload
-            </Label>
-            <p> </p>
-            <Grid.Row>
-              <Image
-                src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
-                centered
-              />
-            </Grid.Row>
-            <Grid.Column>
-              {imgAnnotation.map((annotation) => (
-                <AnnotationDisplay
-                  annotation={annotation}
-                />
-              ))}
-            </Grid.Column>
-            <Grid.Row>
-              <ImageUpload onUploadClick={onUploadClick} setImgUrl={setImgUrl} />
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Column>
-            <ImageOperation
-              Annotations={imgAnnotation}
-              canEdit={imgUpdated.url !== ''}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Button positive onClick={onSubmitChange}>
-            Submit Annotation Changes
-          </Button>
-        </Grid.Row>
+        <Grid.Column computer={12} largeScreen={12} widescreen={12}>
+          <div className=".app-info-panel" data-tid="appinfo">
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column>
+                  <Label as="a" size="huge" color="green" tag>
+                    Image Upload
+                  </Label>
+                  <p> </p>
+                  <Grid.Row>
+                    <Image
+                      src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
+                      centered
+                    />
+                  </Grid.Row>
+                  <Grid.Column>
+                    {imgAnnotation.map((annotation) => (
+                      <AnnotationDisplay
+                        annotation={annotation}
+                      />
+                    ))}
+                  </Grid.Column>
+                  <Grid.Row>
+                    <ImageUpload onUploadClick={onUploadClick} setImgUrl={setImgUrl} />
+                  </Grid.Row>
+                </Grid.Column>
+                <Grid.Column>
+                  <ImageOperation
+                    Annotations={imgAnnotation}
+                    canEdit={imgUpdated.url !== ''}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Button positive onClick={onSubmitChange}>
+                  Submit Annotation Changes
+                </Button>
+              </Grid.Row>
+            </Grid>
+          </div>
+        </Grid.Column>
+        <Grid.Column computer={4} largeScreen={4} widescreen={4}>
+          <ImageHistory />
+        </Grid.Column>
       </Grid>
     </div>
   );
