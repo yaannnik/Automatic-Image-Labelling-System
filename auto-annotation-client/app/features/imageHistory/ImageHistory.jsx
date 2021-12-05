@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Item, Label, Dropdown, Progress } from 'semantic-ui-react';
 import log from 'electron-log';
 
-export default function TagCategoryPage(props: any) {
+export default function ImageHistory(props: any) {
   // const { imgList } = props;
   const items = [
     {
