@@ -76,8 +76,6 @@ export default function AppIcon(props: { imgData: [] }) {
     imgUpdated.annotation = imgAnnotation;
     imgData.push(imgUpdated);
     const data = JSON.stringify(imgUpdated);
-    // TODO: upload with HTTP POST here
-
     const service = new ImgService();
     log.info(imgUrl);
     const rsp = service.postAnnotation({ data });

@@ -3,7 +3,33 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Form, Button, Header, Message, Image, Segment } from 'semantic-ui-react';
 import log from 'electron-log';
 
+// back end api service
+import ImgService from '../../utils/getService';
+
 export default function Login(props: any) {
+  const clickLoginButton = () => {
+    const service = new ImgService();
+    const rsp = service.postLogin({ data });
+    rsp
+      .then(response => {
+        log.info(response);
+      })
+      .catch(error => {
+        log.info(error);
+      });
+  };
+  const clickSignupButton = () => {
+    const service = new ImgService();
+    const rsp = service.postSignup({ data });
+    rsp
+      .then(response => {
+        log.info(response);
+      })
+      .catch(error => {
+        log.info(error);
+      });
+  };
+
   return (
     <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -21,13 +47,13 @@ export default function Login(props: any) {
               type="password"
             />
 
-            <Button color="teal" fluid size="large">
+            <Button color="teal" fluid size="large" onClick={clickLoginButton}>
               Login
             </Button>
           </Segment>
         </Form>
         <Message>
-          New to us? <a href="#">Sign Up</a>
+          New to us? <Button color="teal" fluid onClick={clickSignupButton}>Sign Up</Button>
         </Message>
       </Grid.Column>
     </Grid>

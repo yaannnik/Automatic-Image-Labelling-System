@@ -3,33 +3,57 @@ import log from 'electron-log';
 
 export default class ImgService {
 
-  async getImage(params={}) {
-    log.info('Calling service authenticationo');
+  // HTTP GET request to get image detection results
+  async getImage(params = {}) {
+    log.info('Calling service for image detection results');
     const config = {
       ...this.Config,
       ...{
         method: 'get',
-        url: `http://127.0.0.1:5000/get`,
+        url: 'http://127.0.0.1:5000/get',
         params,
       },
     };
-    // const rsp = await axios(config);
-    // return rsp.data;
     return axios(config);
   }
-  async postAnnotation(data={}) {
-    log.info('Calling service authenticationo');
+  // HTTP POST request to post annnotation changes to backend
+  async postAnnotation(data = {}) {
+    log.info('Calling service for post annotation change');
     const config = {
       ...this.Config,
       ...{
         method: 'post',
-        url: `http://127.0.0.1:5000/post`,
+        url: 'http://127.0.0.1:5000/post',
         data,
       },
     };
-    // const rsp = await axios(config);
-    // return rsp.data;
     return axios(config);
   }
-  
+  // HTTP POST request for user signup
+  async postSignup(data = {}) {
+    log.info('Calling service signup');
+    const config = {
+      ...this.Config,
+      ...{
+        method: 'post',
+        url: 'http://127.0.0.1:5000/signup',
+        data,
+      },
+    };
+    return axios(config);
+  }
+  // HTTP POST request for user login
+  async postLogin(data = {}) {
+    log.info('Calling service login');
+    const config = {
+      ...this.Config,
+      ...{
+        method: 'post',
+        url: 'http://127.0.0.1:5000/login',
+        data,
+      },
+    };
+    return axios(config);
+  }
+
 }
