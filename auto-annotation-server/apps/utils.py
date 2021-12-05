@@ -14,14 +14,16 @@ from detectron2.data.detection_utils import read_image
 from detectron2.utils.logger import setup_logger
 from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
-from predictor import VisualizationHelper
+from apps.predictor import VisualizationHelper
 
 class PredictionCase:
-    def __init__(self, img_path, pred_class, score, pred_box):
+    def __init__(self, img_path, pred_class, score, pred_box, height, width):
         self.url = img_path
         self.category = pred_class
         self.confidence = score
         self.bbox = pred_box
+        self.height = height
+        self.width = width
 
     def get_url(self):
         return self.url
@@ -35,11 +37,17 @@ class PredictionCase:
     def get_bbox(self):
         return self.bbox
 
+    def get_height(self):
+        return self.height
+
+    def get_width(self):
+        return self.width
+
     def __str__(self):
         return "<Object: " + COCO_CATEGORIES[self.category]["name"] + ";\n"\
                           + "score: " + str(self.confidence) + ";\n"\
                           + "bbox: " + str(self.bbox) + ">\n"
-    
+
     def __repr__(self):
         return "<Object: " + COCO_CATEGORIES[self.category]["name"] + ";\n" \
                           + "score: " + str(self.confidence) + ";\n" \
@@ -78,7 +86,7 @@ def predImages(imgs, vis):
         cv2.imwrite(img_label, visualized_output.get_image()[:, :, ::-1])
 
         # img: url of the image
-        preds.append((img_label, predictions))
+        preds.append(([img_label, height, width], predictions))
 
         logger = setup_logger()
         logger.info(
@@ -101,8 +109,10 @@ def getPredResult(preds):
     res = []
 
     for pred in preds:
-        img_path  = pred[0]
-        
+        img_path = pred[0][0]
+        height = pred[0][1]
+        width = pred[0][1]
+
         if "instances" not in pred[1]:
             predCase = PredictionCase(img_path, -1, -1.0, [-1.0, -1.0, -1.0, -1.0])
             tmp = [predCase]
@@ -124,7 +134,7 @@ def getPredResult(preds):
         for i in range(num_targets):
             pred_class = pred_classes[i].item()
             score = scores[i].item()
-              
+
             x1 = pred_boxes.tensor[i, 0].clamp(min=0, max=width).item()
             y1 = pred_boxes.tensor[i, 1].clamp(min=0, max=height).item()
             x2 = pred_boxes.tensor[i, 2].clamp(min=0, max=width).item()
@@ -135,7 +145,7 @@ def getPredResult(preds):
                             + " with score of " + str(score) \
                             + " in " + str(pred_box))
 
-            predCase = PredictionCase(img_path, pred_class, score, pred_box)
+            predCase = PredictionCase(img_path, pred_class, score, pred_box, height, width)
             tmp.append(predCase)
 
         res.append(tmp)
@@ -156,7 +166,7 @@ def run(imgs, model, config_file):
     res = getPredResult(preds)
 
     print(res)
-    
+
     return res
 
 
