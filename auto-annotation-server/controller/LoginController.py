@@ -68,6 +68,6 @@ def login():
         session['id'] = user.id
 
         return session['user']
-
+    return username
 if __name__ == "__main__":
     app.run()
