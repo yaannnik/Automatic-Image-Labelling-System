@@ -1,6 +1,7 @@
 import os
 from entity.User import User
 from dao import db
+from flask import request, session
 
 
 
@@ -15,3 +16,5 @@ class userDao:
         self.User.set_json(json_path)
         db.session.add(self.User)
         db.session.commit()
+        session['user'] = self.User.name
+        session['id'] = self.User.id
