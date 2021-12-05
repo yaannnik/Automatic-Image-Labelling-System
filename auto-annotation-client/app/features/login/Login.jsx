@@ -1,15 +1,20 @@
+/* eslint-disable promise/always-return */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
-import { Grid, Form, Button, Header, Message, Image, Segment } from 'semantic-ui-react';
+import { Grid, Form, Button, Header, Message, Image, Segment, Modal } from 'semantic-ui-react';
 import log from 'electron-log';
 
 // back end api service
 import ImgService from '../../utils/getService';
 
-export default function Login(props: any) {
+// internal components
+import UserInfo from './userInfo';
+
+export default function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(false);
   const clickLoginButton = () => {
     const service = new ImgService();
     const data = {
@@ -19,17 +24,6 @@ export default function Login(props: any) {
     const rsp = service.postLogin(data);
     rsp
       .then((response) => {
-        log.info(response);
-      })
-      .catch(error => {
-        log.info(error);
-      });
-  };
-  const clickSignupButton = () => {
-    const service = new ImgService();
-    const rsp = service.postSignup({ data });
-    rsp
-      .then(response => {
         log.info(response);
       })
       .catch(error => {
@@ -68,7 +62,30 @@ export default function Login(props: any) {
           </Segment>
         </Form>
         <Message>
-          New to us? <Button color="teal" fluid onClick={clickSignupButton}>Sign Up</Button>
+          New to us?
+          <Modal
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+            open={open}
+            size="tiny"
+            closeIcon
+            trigger={<Button color="teal" fluid >Sign Up</Button>}
+          >
+            <Modal.Header> Create your account with us</Modal.Header>
+            <UserInfo />
+            <Modal.Actions>
+              <Button color="black" onClick={() => setOpen(false)}>
+                Nope
+              </Button>
+              <Button
+                content="Confirm"
+                labelPosition="right"
+                icon="checkmark"
+                onClick={() => setOpen(false)}
+                positive
+              />
+            </Modal.Actions>
+          </Modal>
         </Message>
       </Grid.Column>
     </Grid>
