@@ -10,10 +10,12 @@ class userDao:
         self.User = User
 
     def add_user(self):
-        model_path = 'train_model/' + self.User.name
-        json_path = 'train_json/' + self.User.name
+        model_path = '/users/' + self.User.name + '/model/model_final.pth'
+        json_path = '/users/' + self.User.name + '/data/'
+        config_path = '/users/' + self.User.name + '/config/config.yaml'
         self.User.set_model(model_path)
         self.User.set_json(json_path)
+        self.User.set_config(config_path)
         db.session.add(self.User)
         db.session.commit()
         session['user'] = self.User.name

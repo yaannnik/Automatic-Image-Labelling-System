@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.append("..")
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash  # 哈希加密

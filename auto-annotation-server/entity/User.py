@@ -9,6 +9,7 @@ class User(db.Model):
     name = db.Column(db.String(64), unique=True)
     model_path = db.Column(db.String(128), unique=True)  # 存放模型的路径
     json_path = db.Column(db.String(128), unique=True)   # 存放json文件的路径
+    config_path = db.Column(db.String(128), unique=True)   # 存放json文件的路径
     password = db.Column(db.String(128))
     log = db.relationship("Log", backref="tbl_logs", lazy="dynamic")
 
@@ -21,3 +22,6 @@ class User(db.Model):
 
     def set_json(self, value):
         self.json_path = value
+
+    def set_config(self, value):
+        self.config_path = value
