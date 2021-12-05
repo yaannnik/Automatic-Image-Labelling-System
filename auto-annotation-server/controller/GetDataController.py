@@ -1,4 +1,5 @@
 import os
+import sys
 
 from flask import Flask, Blueprint
 from controller.AccountAPI import account_api
@@ -31,6 +32,8 @@ def getData():
     imgs = []
     imgs.append(url)
 
+    model = sys.path[0] + "/../" + user.model_path
+    config_file = sys.path[0] + "/../" + user.config_path
     cases = run(imgs, model, config_file)
 
     case_dict = {"url": url, "annotation": [], "height": 0, "width": 0}

@@ -1,4 +1,5 @@
 import os
+import sys
 
 from flask import Flask, Blueprint
 from controller.AccountAPI import account_api
@@ -20,7 +21,7 @@ def getpath(url):
     dataset_path = user.json_path
     photo = url.split("/")[-1]
     photo = photo.split(".")[0]
-    photo_json = '../' + dataset_path + '/' + photo + '.json'
+    photo_json = sys.path[0] + '/../' + dataset_path + '/' + photo + '.json'
     # os.mkdir(dataset_path)
     return photo_json
 
