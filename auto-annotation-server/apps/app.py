@@ -6,8 +6,10 @@ from flask import request
 import yaml
 import json
 import sys
+import os
+sys.path.append("..")
 
-from utils import run, PredictionCase
+from apps.utils import run, PredictionCase
 from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
 app = Flask(__name__)
@@ -51,17 +53,22 @@ def postData():
 
     photo_json = getpath(url)
 
-    retdata = {"version": "4.5.9", 
-               "flags": {}, 
-               "shapes": [], 
-               "imagePath": url.split("/")[-1], 
-               "imageData": "Encoded", 
-               "imageHeight": 162,
-               "imageWidth": 256, 
-               "lineColor": [0, 255, 0, 128], 
+    retdata = {"version": "4.5.9",
+               "flags": {},
+               "shapes": [],
+               "imagePath": url.split("/")[-1],
+               "imageData": "Encoded",
+               "imageHeight": 0,
+               "imageWidth": 0,
+               "lineColor": [0, 255, 0, 128],
                "fillColor": [255, 0, 0, 128]}
 
     for anno in annotations:
+        if anno["confidence"] == -100:
+            retdata["imageWidth"] = anno["bbox"][2]
+            retdata["imageHeight"] = anno["bbox"][3]
+            continue
+
         shape = {"line_color": None,
                "fill_color": None,
                "label": anno["category"],
@@ -75,7 +82,7 @@ def postData():
         json.dump(retdata, fp, indent=2)
 
     return jsonify(retdata)
-    
+
 
 @app.route('/get', methods=['GET'])  #前端获取训练数据
 def getData():
@@ -89,7 +96,7 @@ def getData():
 
     cases = run(imgs, model, config_file)
 
-    case_dict = {"url": url, "annotation": []}
+    case_dict = {"url": url, "annotation": [], "height": 0, "width": 0}
 
     for case in cases[0]:
         anno = {}
@@ -98,6 +105,8 @@ def getData():
         anno["confidence"] = case.confidence
         case_dict["url"] = case.url
         case_dict["annotation"].append(anno)
+        case_dict["height"] = case.height
+        case_dict["width"] = case.width
     print(case_dict)
 
     return jsonify(case_dict)
