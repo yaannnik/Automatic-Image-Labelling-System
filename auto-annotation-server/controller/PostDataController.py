@@ -36,24 +36,31 @@ def postData():
 
     photo_json = getpath(url)
 
-    retdata = {"version": "4.5.9", 
-               "flags": {}, 
-               "shapes": [], 
-               "imagePath": url.split("/")[-1], 
-               "imageData": "Encoded", 
-               "imageHeight": 162,
-               "imageWidth": 256, 
-               "lineColor": [0, 255, 0, 128], 
+    retdata = {"version": "4.5.9",
+               "flags": {},
+               "shapes": [],
+               "imagePath": url.split("/")[-1],
+               "imageData": "Encoded",
+               "imageHeight": 0,
+               "imageWidth": 0,
+               "lineColor": [0, 255, 0, 128],
                "fillColor": [255, 0, 0, 128]}
 
     for anno in annotations:
-        shape = {"line_color": None,
-               "fill_color": None,
-               "label": anno["category"],
-               "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
-               "group_id": None,
-               "shape_type": "rectangle",
-               "flags": {}}
+        if anno["confidence"] == -100:
+            retdata["imageWidth"] = anno["bbox"][2]
+            retdata["imageHeight"] = anno["bbox"][3]
+            continue
+
+        shape = {
+            "line_color": None,
+            "fill_color": None,
+            "label": anno["category"],
+            "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
+            "group_id": None,
+            "shape_type": "rectangle",
+            "flags": {}
+            }
         retdata["shapes"].append(shape)
 
     with open(photo_json, 'w', encoding='UTF-8') as fp:
