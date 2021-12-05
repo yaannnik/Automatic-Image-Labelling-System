@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { Grid, Form, Button, Header, Message, Image, Segment } from 'semantic-ui-react';
@@ -7,11 +8,17 @@ import log from 'electron-log';
 import ImgService from '../../utils/getService';
 
 export default function Login(props: any) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const clickLoginButton = () => {
     const service = new ImgService();
+    const data = {
+      username,
+      password,
+    };
     const rsp = service.postLogin({ data });
     rsp
-      .then(response => {
+      .then((response) => {
         log.info(response);
       })
       .catch(error => {
@@ -29,6 +36,13 @@ export default function Login(props: any) {
         log.info(error);
       });
   };
+  // listening on input change of username and password
+  const inputUsername = (e) => {
+    setUsername(e.target.value);
+  };
+  const inputPassword = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
@@ -38,13 +52,14 @@ export default function Login(props: any) {
         </Header>
         <Form size="large">
           <Segment stacked>
-            <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
+            <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" onChange={inputUsername} />
             <Form.Input
               fluid
               icon="lock"
               iconPosition="left"
               placeholder="Password"
               type="password"
+              onChange={inputPassword}
             />
 
             <Button color="teal" fluid size="large" onClick={clickLoginButton}>
