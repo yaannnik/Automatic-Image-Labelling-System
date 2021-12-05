@@ -24,13 +24,16 @@ def getData():
     name = session['user']
     user = User.query.filter_by(name=name).first()
     url = request.args.get("url")  # image url uploaded by
-
+    # print(request.get_json())
+    # print(url)
+    # annos = []
+    # data = request.get_json()
     imgs = []
     imgs.append(url)
 
     cases = run(imgs, model, config_file)
 
-    case_dict = {"url": url, "annotation": []}
+    case_dict = {"url": url, "annotation": [], "height": 0, "width": 0}
 
     for case in cases[0]:
         anno = {}
@@ -39,6 +42,8 @@ def getData():
         anno["confidence"] = case.confidence
         case_dict["url"] = case.url
         case_dict["annotation"].append(anno)
+        case_dict["height"] = case.height
+        case_dict["width"] = case.width
     print(case_dict)
 
     return jsonify(case_dict)
