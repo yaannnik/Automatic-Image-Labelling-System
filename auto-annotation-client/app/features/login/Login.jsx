@@ -16,7 +16,7 @@ export default function Login(props: any) {
       username,
       password,
     };
-    const rsp = service.postLogin({ data });
+    const rsp = service.postLogin(data);
     rsp
       .then((response) => {
         log.info(response);

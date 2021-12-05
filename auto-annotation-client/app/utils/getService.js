@@ -43,7 +43,7 @@ export default class ImgService {
     return axios(config);
   }
   // HTTP POST request for user login
-  async postLogin(data = {}) {
+  async postLogin(data) {
     log.info('Calling service login');
     const config = {
       ...this.Config,

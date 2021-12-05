@@ -58,6 +58,7 @@ def login():
     postForm = request.get_json()  # 前端传来数据
     username = postForm["username"]
     password = postForm["password"]
+    print(username)
     user = User.query.filter_by(name=username).first()
 
     if user and check_password_hash(user.password, password):
