@@ -1,7 +1,7 @@
 // debug console output
 import log from 'electron-log';
 // react and semantic ui framework
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Item,
   Button,
@@ -15,6 +15,9 @@ import ImageOperation from '../imageOperations/ImageOperation';
 
 // data structure
 import ImgItem from '../../dataStructure/ImgItem';
+
+// helper function
+import { DrawRectangle } from './drawFrame';
 
 // constants
 import * as imgSrc from '../../constants/img.json';
@@ -36,8 +39,15 @@ export default function AppIcon(props: { imgData: [] }) {
   const [imgUrl, setImgUrl] = useState('');
   const [imgAnnotation, setAnnotation] = useState([]);
   const [imgUpdated, setImgUpdated] = useState(new ImgItem(imgUrl, []));
+  const [coordinate, setCoordinate] = useState({});
+
+  useEffect(() => {
+    new DrawRectangle('bigimg', imgAnnotation);
+    console.log(imgAnnotation);
+  }, [imgAnnotation]);
 
   const onUploadClick = () => {
+
     log.info('submit pic');
     log.info(imgUrl);
     // setImgUpdated(new ImgItem(imgUrl, []));
@@ -101,10 +111,11 @@ export default function AppIcon(props: { imgData: [] }) {
                   </Label>
                   <p> </p>
                   <Grid.Row>
-                    <Image
-                      src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
-                      centered
-                    />
+                      <Image
+                        id="bigimg"
+                        src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
+                        centered
+                      />
                   </Grid.Row>
                   <Grid.Column>
                     {imgAnnotation.map((annotation) => (

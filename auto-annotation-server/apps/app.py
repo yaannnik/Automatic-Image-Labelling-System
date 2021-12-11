@@ -41,7 +41,7 @@ def getpath(url):
     photo_json = dataset_path + photo + '.json'
     return photo_json
 
-@app.route('/post', methods=['POST'])  #前端返回标注结果
+@app.route('/post', methods=['POST'])  # results returned from the front-end
 def postData():
     data = request.get_json()
     updated_data = json.loads(data["data"])  # image options updated by client
@@ -88,7 +88,7 @@ def postData():
     return jsonify(retdata)
 
 
-@app.route('/get', methods=['GET'])  #前端获取训练数据
+@app.route('/get', methods=['GET'])  # get image detetion results from model
 def getData():
     url = request.args.get("url")  # image url uploaded by
     # print(request.get_json())

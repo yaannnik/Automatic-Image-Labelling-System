@@ -61,13 +61,20 @@ def login():
     print(username)
     user = User.query.filter_by(name=username).first()
 
+    # successfully login
     if user and check_password_hash(user.password, password):
         # 登陆成功将用户信息添加到session信息中去
         print('yes')
         session['user'] = user.name
         session['id'] = user.id
+        return '0'
+    # user does not exist
+    elif not user:
+        return '1'
+    # password does not match
+    else:
+        return '2'
 
-        return session['user']
     return username
 if __name__ == "__main__":
     app.run()
