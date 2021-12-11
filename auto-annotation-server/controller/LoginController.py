@@ -74,7 +74,5 @@ def login():
     # password does not match
     else:
         return '2'
-
-    return username
 if __name__ == "__main__":
     app.run()

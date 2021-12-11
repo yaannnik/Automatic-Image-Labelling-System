@@ -27,7 +27,7 @@ export default function AnnotationDisplay(props: {
       <Card.Meta>
         category: {annotation.category}
         <br />
-        Bounding box: {annotation.bbox}
+        Bounding box: ({annotation.bbox[0]}, {annotation.bbox[1]}), ({annotation.bbox[2]}, {annotation.bbox[3]})
         <br />
         Confidence: {annotation.confidence}
       </Card.Meta>

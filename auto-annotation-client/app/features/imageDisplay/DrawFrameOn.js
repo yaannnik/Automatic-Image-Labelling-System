@@ -1,7 +1,7 @@
 // initDraw(document.getElementById("canvas"));
 import AnnotationItem from "../../dataStructure/AnnotationItem";
 
-export function initDraw(id, imgAnnotation) {
+export function initDraw(id, candidate) {
   const canvas = document.getElementById(id);
   let dataReturn = {};
 
@@ -10,21 +10,16 @@ export function initDraw(id, imgAnnotation) {
     let y1 = mouse.startY;
     let x2 = mouse.x;
     let y2 = mouse.y;
-    // down to up, then recalculate
-    if (mouse.y > mouse.startY) {
-      y1 = mouse.y;
-      y2 = mouse.startY;
-    }
     // calculate relative coordinate with respect to the image
-    x1 -= 14;
-    x2 -= 14;
-    y1 -= 150;
-    y2 -= 150;
+    x1 -= 0;
+    x2 -= 0;
+    y1 -= 0;
+    y2 -= 0;
     dataReturn = {
-      startX: x1,
-      startY: y1,
-      endX: x2,
-      endY: y2
+      startX: Math.min(x1, x2),
+      startY: Math.min(y1, y2),
+      endX: Math.max(x1, x2),
+      endY: Math.max(y1, y2)
     };
   }
 
@@ -67,7 +62,7 @@ export function initDraw(id, imgAnnotation) {
       canvas.style.cursor = "default";
       console.log("finsihed.");
       calculateCoordinate();
-      imgAnnotation.push(
+      candidate.push(
         new AnnotationItem(
           "mask",
           [
@@ -79,8 +74,7 @@ export function initDraw(id, imgAnnotation) {
           1
         )
       );
-      console.log(imgAnnotation);
-      return dataReturn;
+      console.log(candidate);
     } else {
       console.log("begun.");
       mouse.startX = mouse.x;

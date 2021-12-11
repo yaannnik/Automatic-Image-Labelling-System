@@ -1,0 +1,13 @@
+.backgroundImage {
+  /* border: 1px solid #269ee4; */
+  background-size: 'contain';
+  background-repeat: no-repeat;
+  text-align: left;
+  position: relative;
+  /* display: flex;
+  align-items: flex-end; */
+}
+
+/* .backgroundImage:hover {
+  border: 3px solid #f5673b;
+} */
