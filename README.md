@@ -39,7 +39,7 @@ Use `start-frontend.sh` and `start-backend.sh` to start the front-end and back-e
 
 To use your unique model and settings, sign up/login with your account first.
 
-<img src="/Users/yangyi/Columbia/学习资料/E6893-Big Data Analysis/E6893-final-project/figures/login.png" alt="Login" style="zoom:40%;" />
+<img src="./figures/login.png" alt="Login" style="zoom:40%;" />
 
 
 
