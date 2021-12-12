@@ -110,6 +110,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
           selectOnBlur={false}
           scrolling
           search
+          fluid
           selection
           placeholder="Select an option"
           onChange={OnObjectChange}
