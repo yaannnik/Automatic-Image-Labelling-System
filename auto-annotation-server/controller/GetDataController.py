@@ -34,7 +34,7 @@ def getData():
 
     model = sys.path[0] + "/../" + user.model_path
     config_file = sys.path[0] + "/../" + user.config_path
-    cases = run(imgs, model, config_file)
+    cases = run(imgs, model, config_file, name)
 
     case_dict = {"url": url, "annotation": [], "height": 0, "width": 0}
 

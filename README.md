@@ -21,6 +21,10 @@ $ npm install
 
 
 
+* We have made our project running on our Google Cloud Server. If you would like to run our project on your own environment, please follow the installation instructions.
+
+
+
 ### Build Detectron2
 
 Our deep learning engine is based on [Detectron2](https://github.com/facebookresearch/detectron2). Run `install.sh` to install Detectron2. Set environmental variable `$DETECTRON2_DATASETS` to be path to your dataset.

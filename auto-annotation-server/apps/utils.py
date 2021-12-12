@@ -59,7 +59,7 @@ def loadModel(cfg, model):
     cfg.MODEL.WEIGHTS = model
     cfg.freeze()
 
-def predImages(imgs, vis):
+def predImages(imgs, vis, name):
     preds = []
 
     for img in imgs:
@@ -78,7 +78,7 @@ def predImages(imgs, vis):
 
         img_label = img.split("/")[-1]
         img_label = img_label.split(".")[0]
-        img_label = sys.path[0] + "/../cache/" + img_label + '-1.jpeg'
+        img_label = sys.path[0] + "/../users/%s/data/" % name + img_label + '.jpeg'
         print(img_label)
         # cv2.namedWindow("WINDOW_NAME", cv2.WINDOW_NORMAL)
         # cv2.imshow("WINDOW_NAME", visualized_output.get_image()[:, :, ::-1])
@@ -154,7 +154,7 @@ def getPredResult(preds):
     return res
 
 
-def run(imgs, model, config_file):
+def run(imgs, model, config_file, name):
     cfg = get_cfg()
     cfg.merge_from_file(config_file)
 
@@ -162,7 +162,7 @@ def run(imgs, model, config_file):
 
     vis = VisualizationHelper(cfg)
 
-    preds = predImages(imgs, vis)
+    preds = predImages(imgs, vis, name)
 
     res = getPredResult(preds)
 
