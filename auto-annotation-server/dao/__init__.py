@@ -5,8 +5,8 @@ pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 class Config(object):
-    """配置参数"""
-    # 设置连接数据库的URL
+    """set parameters"""
+    # set URL
     user = 'admin'
     password = 'chen1259'
     database = 'project'
@@ -14,9 +14,9 @@ class Config(object):
 
 
 
-# 设置参数
+# set parameters
 app.config.from_object(Config)
 app.config['SECRET_KEY'] = '123456'
 
-'''创建数据库 sqlalchemy 工具对象'''
+'''create sqlalchemy object'''
 db = SQLAlchemy(app)

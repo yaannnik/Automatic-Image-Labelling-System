@@ -15,7 +15,7 @@ app.register_blueprint(signup_api)
 
 @signup_api.route("/signup", methods=['POST'])
 def signup():
-    postForm = request.get_json()  # 前端传来数据
+    postForm = request.get_json() 
     username = postForm["username"]
     password = generate_password_hash(postForm["password"])
     user = User(name=username, password=password)

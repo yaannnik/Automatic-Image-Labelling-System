@@ -25,7 +25,7 @@ def getpath(url):
     # os.mkdir(dataset_path)
     return photo_json
 
-@app.route('/post', methods=['POST'])  #前端返回标注结果
+@app.route('/post', methods=['POST'])  # annotation
 def postData():
     data = request.get_json()
     updated_data = json.loads(data["data"])  # image options updated by client

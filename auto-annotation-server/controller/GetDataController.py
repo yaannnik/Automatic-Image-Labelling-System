@@ -20,7 +20,7 @@ getData_api = Blueprint('getData_api', __name__)
 app.register_blueprint(getData_api)
 
 
-@app.route('/get', methods=['GET'])  #前端获取训练数据
+@app.route('/get', methods=['GET']) 
 def getData():
     name = session['user']
     user = User.query.filter_by(name=name).first()

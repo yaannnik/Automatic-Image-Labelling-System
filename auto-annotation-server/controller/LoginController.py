@@ -24,12 +24,12 @@ app.register_blueprint(signup_api)
 app.register_blueprint(postData_api)
 app.register_blueprint(getData_api)
 
-# 钩子函数 before_request
+# before_request
 @app.before_request
 def before():
     print("app.before")
 
-# 钩子函数 after_request
+# after_request
 @app.after_request
 def after(response):
     api_name = request.url
@@ -43,7 +43,7 @@ def after(response):
         uplogsservice.uplog()
     return response
 
-# 500时抛出异常
+# 500 exception
 @app.errorhandler(500)
 def error_handler(err):
     api_name = request.url
@@ -55,7 +55,7 @@ def error_handler(err):
 
 @app.route("/login", methods=['POST'])
 def login():
-    postForm = request.get_json()  # 前端传来数据
+    postForm = request.get_json() 
     username = postForm["username"]
     password = postForm["password"]
     print(username)
@@ -63,7 +63,7 @@ def login():
 
     # successfully login
     if user and check_password_hash(user.password, password):
-        # 登陆成功将用户信息添加到session信息中去
+        # user info
         print('yes')
         session['user'] = user.name
         session['id'] = user.id
@@ -74,6 +74,8 @@ def login():
     # password does not match
     else:
         return '2'
+
+
 if __name__ == "__main__":
     print("___       ________________ _____________________  ____________\n\
 __ |     / /__  ____/__  / __  ____/_  __ \__   |/  /__  ____/\n\

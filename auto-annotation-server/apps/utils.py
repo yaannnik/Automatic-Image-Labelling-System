@@ -112,10 +112,11 @@ def getPredResult(preds):
     for pred in preds:
         img_path = pred[0][0]
         height = pred[0][1]
-        width = pred[0][1]
+        width = pred[0][2]
 
-        if "instances" not in pred[1]:
-            predCase = PredictionCase(img_path, -1, -1.0, [-1.0, -1.0, -1.0, -1.0])
+        if len(pred[1]["instances"]) == 0:
+            print("here")
+            predCase = PredictionCase(img_path, -1, -1.0, [-1.0, -1.0, -1.0, -1.0], height, width)
             tmp = [predCase]
             res.append(tmp)
             continue
