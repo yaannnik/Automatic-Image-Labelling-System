@@ -65,7 +65,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
   };
 
   // handle changes on annotation
-  const addAnnoation = (imgItem: AnnotationItem) => {
+  const addAnnoation = (imgItem) => {
     if (imgItem.confidence !== -1) {
       log.info('add new annotation: ', imgItem);
       const index = Annotations.indexOf(imgItem);
@@ -75,7 +75,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
   };
 
   // handle changes on delete annotation
-  const deleteAnnotation = (imgItem: AnnotationItem) => {
+  const deleteAnnotation = (imgItem) => {
     if (imgItem.confidence !== -1) {
       log.info('delete existed annotation: ', imgItem);
       const index = Annotations.indexOf(imgItem);
@@ -87,7 +87,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
   };
 
   // handle changes on update annotation
-  const updateAnnotation = (imgItem: AnnotationItem) => {
+  const updateAnnotation = (imgItem) => {
     if (imgItem.confidence !== -1) {
       log.info('update existed annotation: ', imgItem);
       const index = Annotations.indexOf(imgItem);

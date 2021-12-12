@@ -15,6 +15,9 @@ export default function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line max-len
+  const [loginStatus, setLoginStatus] = useState(3);  // login status: 0 for success, 1 for user not exist, \
+  // 2 for pwd not right, 3 for not goin
   const clickLoginButton = () => {
     const service = new ImgService();
     const data = {
@@ -25,10 +28,52 @@ export default function Login(props) {
     rsp
       .then((response) => {
         log.info(response);
+        if (response.status === 200) {
+          setLoginStatus(response.data);
+        }
       })
       .catch(error => {
         log.info(error);
       });
+  };
+  // check the password persistence
+  const CheckMessage = () => {
+
+    if (loginStatus === 0) {
+      return (
+        <Message
+          positive
+          header="Login successfully!"
+        />
+      );
+    }
+    if (loginStatus === 1) {
+      return (
+        <Message
+          negative
+          header="There was some errors with your login"
+          list={[
+            'Login Failed: Invalid username.',
+          ]}
+        />
+      );
+    }
+    if (loginStatus === 1) {
+      return (
+        <Message
+          negative
+          header="There was some errors with your login"
+          list={[
+            'Login Failed: Username and password does not match, please check again :)',
+          ]}
+        />
+      );
+    }
+    return (
+      <Message negative>
+        User does not login
+      </Message>
+    );
   };
   // listening on input change of username and password
   const inputUsername = (e) => {
@@ -55,7 +100,7 @@ export default function Login(props) {
               type="password"
               onChange={inputPassword}
             />
-
+            <CheckMessage />
             <Button color="teal" fluid size="large" onClick={clickLoginButton}>
               Login
             </Button>
