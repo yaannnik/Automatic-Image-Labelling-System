@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { Grid, Input, Icon, Button, Label, Dropdown } from 'semantic-ui-react';
+import { Grid, Input, Icon, Button, Label, Dropdown, Divider } from 'semantic-ui-react';
 import log from 'electron-log';
 
 // data structure
@@ -17,7 +17,6 @@ export default function AddAnnotation(props: {
   const [inputUpperY, setInputUpperY] = useState(0);
   const [inputLowerY, setInputLowerY] = useState(0);
   const [inputLowerX, setInputLowerX] = useState(0);
-  const [inputCategory, setInputCategory] = useState('');
   const [annotationSelected, setAnnotationSelected] = useState(new AnnotationItem('', [], 1));
   // ----------dropdown options here--------------
   const categoryOptions = [
@@ -66,10 +65,12 @@ export default function AddAnnotation(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <h1>Add an annotation</h1>
+        {/* <h1>Add an annotation</h1> */}
+        {/* <Label size="large" color="green">Add an annotation</Label> */}
       </Grid.Row>
       <Grid.Row>
-        <Label size="large" color="green">Choose a category: mask/unmask</Label>
+      <Divider horizontal>Choose a category: mask/unmask</Divider>
+        {/* <Label size="large" color="green"></Label> */}
       </Grid.Row>
       <Grid.Row>
         <Dropdown
@@ -81,8 +82,8 @@ export default function AddAnnotation(props: {
           onChange={categoryChange} />
       </Grid.Row>
       <Grid.Row>
-        {/* <h1> Add bounding box </h1> */}
-        <Label size="large" color="green">Add bounding box</Label>
+        <Divider horizontal>Add bounding box</Divider>
+        {/* <Label size="large" color="green">Add bounding box</Label> */}
         <br />
       </Grid.Row>
       <Grid.Row>

@@ -26,7 +26,7 @@ export default function ConfirmChangeBtn(props: {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Update Annotation</Button>}
+      trigger={<Button color="green">Update Annotation</Button>}
     >
       <OptionConfirmation
         option={option}

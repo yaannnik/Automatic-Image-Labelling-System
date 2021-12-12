@@ -4,7 +4,6 @@
 import log from 'electron-log';
 import React, { useState } from 'react';
 import { Icon, Label, Card, Popup, Modal, Button } from 'semantic-ui-react';
-import AnnotationItem from '../../dataStructure/AnnotationItem';
 
 // internal components
 import OptionConfirmation from '../imageOperations/OptionConfirmation';
@@ -15,11 +14,13 @@ export default function AnnotationDisplay(props) {
   } = props;
   const [open, setOpen] = useState(false);  // modal window control
   // tag status in tag header
-  const tagHeader = () => `${annotation.category} with confidence: ${annotation.confidence}`;
+  const tagHeader = () => annotation.confidence === -100 ? 'Deleted' : `${annotation.category} with confidence: ${annotation.confidence}`;
   // tag color based on min_screenshot
   const tagColor = () => {
     // red for unmask and green for mask
+    if (annotation.confidence === -100) return 'black';
     if (annotation.category === 'mask') return 'green';
+
     return 'red';
   };
   // tag info in tag popup
@@ -46,6 +47,7 @@ export default function AnnotationDisplay(props) {
       log.info(Annotations);
     }
     setOpen(false);
+    annotation.confidence = -100;
   };
   return (
     <div>

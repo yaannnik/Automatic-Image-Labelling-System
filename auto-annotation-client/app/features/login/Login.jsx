@@ -12,6 +12,7 @@ import ImgService from '../../utils/getService';
 import UserInfo from './userInfo';
 
 export default function Login(props) {
+  const { setUser } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function Login(props) {
         log.info(response);
         if (response.status === 200) {
           setLoginStatus(response.data);
+          setUser(data.username);
         }
       })
       .catch(error => {
