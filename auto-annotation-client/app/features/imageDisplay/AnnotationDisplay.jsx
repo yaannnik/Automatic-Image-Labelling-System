@@ -15,11 +15,13 @@ export default function AnnotationDisplay(props) {
   } = props;
   const [open, setOpen] = useState(false);  // modal window control
   // tag status in tag header
-  const tagHeader = () => `${annotation.category} with confidence: ${annotation.confidence}`;
+  const tagHeader = () => annotation.confidence === -100 ? 'Deleted' : `${annotation.category} with confidence: ${annotation.confidence}`;
   // tag color based on min_screenshot
   const tagColor = () => {
     // red for unmask and green for mask
+    if (annotation.confidence === -100) return 'black';
     if (annotation.category === 'mask') return 'green';
+
     return 'red';
   };
   // tag info in tag popup
@@ -46,6 +48,7 @@ export default function AnnotationDisplay(props) {
       log.info(Annotations);
     }
     setOpen(false);
+    annotation.confidence = -100;
   };
   return (
     <div>

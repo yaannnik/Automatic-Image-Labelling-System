@@ -25,10 +25,6 @@ def getData():
     name = session['user']
     user = User.query.filter_by(name=name).first()
     url = request.args.get("url")  # image url uploaded by
-    # print(request.get_json())
-    print(url)
-    # annos = []
-    # data = request.get_json()
     imgs = []
     imgs.append(url)
 
