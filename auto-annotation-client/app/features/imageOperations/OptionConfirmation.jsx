@@ -13,17 +13,20 @@ export default function OptionConfirmation(props: {
   const ChangeInformation = () => {
     if (option === 0) {
       return (
-        <p>Add a new annotation with category {candidate.category}, bounding box {candidate.bbox}</p>
+        <p>Add a new annotation with category {candidate.category},
+        bounding box ({candidate.bbox[0]}, {candidate.bbox[1]}), ({candidate.bbox[2]}, {candidate.bbox[3]})</p>
       );
     }
     if (option === 1) {
       return (
-        <p>Delete an annotation with category {candidate.category}, bounding box {candidate.bbox}</p>
+        <p>Delete an annotation with category {candidate.category},
+        bounding box ({candidate.bbox[0]}, {candidate.bbox[1]}), ({candidate.bbox[2]}, {candidate.bbox[3]})</p>
       );
     }
     if (option === 2) {
       return (
-        <p>Change annotation to category {candidate.category}, bounding box {candidate.bbox}</p>
+        <p>Change annotation to category {candidate.category},
+        bounding box ({candidate.bbox[0]}, {candidate.bbox[1]}), ({candidate.bbox[2]}, {candidate.bbox[3]})</p>
       );
     }
   };

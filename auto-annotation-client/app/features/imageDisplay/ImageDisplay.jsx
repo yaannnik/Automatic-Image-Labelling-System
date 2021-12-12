@@ -180,6 +180,7 @@ export default function AppIcon(props: { imgData: [] }) {
                     {imgAnnotation.map((annotation) => (
                       <AnnotationDisplay
                         annotation={annotation}
+                        Annotations={imgAnnotation}
                       />
                     ))}
                   </Grid.Column>
