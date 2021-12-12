@@ -14,6 +14,7 @@ from detectron2.data.detection_utils import read_image
 from detectron2.utils.logger import setup_logger
 from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
 
+sys.path.append("..")
 from apps.predictor import VisualizationHelper
 
 class PredictionCase:
