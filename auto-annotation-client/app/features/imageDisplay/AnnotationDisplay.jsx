@@ -4,7 +4,6 @@
 import log from 'electron-log';
 import React, { useState } from 'react';
 import { Icon, Label, Card, Popup, Modal, Button } from 'semantic-ui-react';
-import AnnotationItem from '../../dataStructure/AnnotationItem';
 
 // internal components
 import OptionConfirmation from '../imageOperations/OptionConfirmation';

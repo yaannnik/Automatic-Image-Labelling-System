@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { Grid, Input, Icon, Button, Dropdown, Label } from 'semantic-ui-react';
+import { Grid, Input, Icon, Button, Dropdown, Label, Divider } from 'semantic-ui-react';
 import log from 'electron-log';
 
 // data structure
@@ -76,12 +76,14 @@ export default function UpdateAnnotation(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <h1>Change an annotation</h1>
+        {/* <h1>Change an annotation</h1> */}
+        <Divider horizontal>Update an annotation</Divider>
       </Grid.Row>
       <Grid.Row>
         <Dropdown
           selectOnBlur={false}
           scrolling
+          fluid
           search
           selection
           placeholder="Select an object"
@@ -91,7 +93,8 @@ export default function UpdateAnnotation(props: {
         />
       </Grid.Row>
       <Grid.Row>
-        <Label size="large" color="green">Choose a category: mask/unmask</Label>
+        {/* <Label size="large" color="green">Choose a category: mask/unmask</Label> */}
+        <Divider horizontal>Choose a category: mask/unmask</Divider>
       </Grid.Row>
       <Grid.Row>
         <Dropdown
@@ -104,7 +107,8 @@ export default function UpdateAnnotation(props: {
       </Grid.Row>
       <Grid.Row>
         {/* <h1> Add bounding box </h1> */}
-        <Label size="large" color="green">Update bounding box</Label>
+        {/* <Label size="large" color="green">Update bounding box</Label> */}
+        <Divider horizontal>Update bounding box</Divider>
         <br />
       </Grid.Row>
       <Grid.Row>

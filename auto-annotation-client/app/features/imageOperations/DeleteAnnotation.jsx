@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { Grid, Dropdown } from 'semantic-ui-react';
+import { Grid, Dropdown, Divider } from 'semantic-ui-react';
 import log from 'electron-log';
 // data structure
 import AnnotationItem from '../../dataStructure/AnnotationItem';
@@ -44,13 +44,15 @@ export default function DeleteAnnotaion(props: {
   return (
     <Grid padded="vertically">
       <Grid.Row>
-        <h1>Delete an annotation</h1>
+        {/* <h1>Delete an annotation</h1> */}
+        <Divider horizontal>Delete an annotation</Divider>
       </Grid.Row>
       <Grid.Row>
         <Dropdown
           selectOnBlur={false}
           scrolling
           search
+          fluid
           selection
           placeholder="Select an object to delete"
           onChange={OnObjectChange}

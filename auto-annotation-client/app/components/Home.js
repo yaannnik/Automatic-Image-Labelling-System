@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 
 // component ui framework
-import React from 'react';
+import React, {useState} from 'react';
 import { Tab } from 'semantic-ui-react';
 // internal component
 
@@ -13,9 +13,10 @@ import Login from '../features/login/Login';
 
 export default function imageHome() {
   const AppDataInfo = [];
+  const [user, setUser] = useState('');
   const panes = [
-    { menuItem: 'Home', render: () => <Tab.Pane>{<ImageDisplay imgData={AppDataInfo} />}</Tab.Pane> },
-    { menuItem: 'Login', render: () => <Tab.Pane>{<Login />}</Tab.Pane> },
+    { menuItem: 'Home', render: () => <Tab.Pane>{<ImageDisplay imgData={AppDataInfo} user={user} />}</Tab.Pane> },
+    { menuItem: 'Login', render: () => <Tab.Pane>{<Login setUser={setUser} />}</Tab.Pane> },
     { menuItem: 'Settings', render: () => <Tab.Pane>Reserved for settings</Tab.Pane> },
   ];
 

@@ -23,7 +23,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
   // -----------component data here --------------
   const objectOptions: MyDropdown[] = [
     { key: 0, value: 0, text: 'add' },
-    { key: 1, value: 1, text: 'remove' },
+    { key: 1, value: 1, text: 'delete' },
     { key: 2, value: 2, text: 'update' }
   ];
   // -----------listening port here --------------

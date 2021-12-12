@@ -4,11 +4,14 @@ import log from 'electron-log';
 // react and semantic ui framework
 import React, { useEffect, useState } from 'react';
 import {
-  Item,
   Button,
   Label,
   Modal,
-  Grid
+  Grid,
+  Divider,
+  Dimmer,
+  Header,
+  Icon
 } from 'semantic-ui-react';
 // TODO: internal component
 import ImageOperation from '../imageOperations/ImageOperation';
@@ -41,7 +44,7 @@ import AnnotationDisplay from './AnnotationDisplay';
 
 export default function AppIcon(props: { imgData: [] }) {
   // connection between front end and back end
-  const { imgData } = props;
+  const { imgData, user } = props;
   const [open, setOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [imgAnnotation, setAnnotation] = useState([]);
@@ -123,6 +126,19 @@ export default function AppIcon(props: { imgData: [] }) {
   };
   return (
     <div>
+      <Dimmer active={user === ''} >
+        <Header as='h2' icon inverted>
+          <Icon name='heart' />
+          Please switch to the Login tab to login
+          <Header.Subheader>User does not login</Header.Subheader>
+        </Header>
+      </Dimmer>
+      <Label as='a' color='green' floating ribbon='right' image>
+        <img src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+        User: {user === '' ? "not login" : user}
+        <Label.Detail>Log out</Label.Detail>
+      </Label>
+      <br />
       {/* <h1> Image Upload </h1> */}
       <Grid columns={2} divided>
         <Grid.Column computer={12} largeScreen={12} widescreen={12}>
@@ -146,6 +162,7 @@ export default function AppIcon(props: { imgData: [] }) {
                       style={backgroundStyle}
                       className={Styles.backgroundImage}
                     />
+                    <br />
                     <Modal
                       onClose={() => setOpen(false)}
                       onOpen={() => setOpen(true)}
@@ -169,6 +186,7 @@ export default function AppIcon(props: { imgData: [] }) {
                     </Modal>
                   </Grid.Row>
                   <Grid.Column>
+                    <Divider horizontal>Annotation display</Divider>
                     {imgAnnotation.map((annotation) => (
                       <AnnotationDisplay
                         annotation={annotation}
