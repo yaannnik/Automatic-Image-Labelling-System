@@ -25,8 +25,8 @@ export function initDraw(id, candidate) {
 
   function setMousePosition(e) {
     const ev = e || window.event; // Moz || IE
-    mouse.x = ev.pageX + window.pageXOffset;
-    mouse.y = ev.pageY - 130;
+    mouse.x = ev.pageX - 15;
+    mouse.y = ev.pageY - 140;
   }
 
   var mouse = {

@@ -53,7 +53,7 @@ export default function AppIcon(props: { imgData: [] }) {
   useEffect(() => {
     console.log(imgAnnotation);
     initDraw('bigimg', candidate);
-  }, [candidate, imgUpdated]);
+  }, [candidate, imgUpdated, imgAnnotation]);
 
   // style of div putting image
   const backgroundStyle = {
