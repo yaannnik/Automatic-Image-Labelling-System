@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 // debug console output
 import log from 'electron-log';
@@ -14,9 +15,7 @@ export default function AnnotationDisplay(props) {
   } = props;
   const [open, setOpen] = useState(false);  // modal window control
   // tag status in tag header
-  const tagHeader = () => {
-    return annotation.category;
-  };
+  const tagHeader = () => `${annotation.category} with confidence: ${annotation.confidence}`;
   // tag color based on min_screenshot
   const tagColor = () => {
     // red for unmask and green for mask
@@ -65,7 +64,7 @@ export default function AnnotationDisplay(props) {
               key={annotation.bbox}
               onClick={() => setOpen(true)}
             >
-              {annotation.category}
+              {tagHeader()}
               <Icon name="close" />
             </Label>}
           >

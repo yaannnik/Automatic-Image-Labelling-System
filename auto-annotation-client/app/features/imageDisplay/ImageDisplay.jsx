@@ -196,7 +196,7 @@ export default function AppIcon(props: { imgData: [] }) {
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
-                <Button positive onClick={onSubmitChange}>
+                <Button positive disabled={imgUpdated.url === ''} onClick={onSubmitChange}>
                   Submit Annotation Changes
                 </Button>
               </Grid.Row>
