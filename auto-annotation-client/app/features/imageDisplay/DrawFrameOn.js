@@ -25,15 +25,17 @@ export function initDraw(id, candidate) {
 
   function setMousePosition(e) {
     const ev = e || window.event; // Moz || IE
-    if (ev.pageX) {
-      // Moz
-      mouse.x = ev.pageX + window.pageXOffset;
-      mouse.y = ev.pageY + window.pageYOffset;
-    } else if (ev.clientX) {
-      // IE
-      mouse.x = ev.clientX + document.body.scrollLeft;
-      mouse.y = ev.clientY + document.body.scrollTop;
-    }
+    // if (ev.pageX) {
+    //   // Moz
+    //   mouse.x = ev.pageX + window.pageXOffset;
+    //   mouse.y = ev.pageY + window.pageYOffset;
+    // } else if (ev.clientX) {
+    //   // IE
+    //   mouse.x = ev.clientX + document.body.scrollLeft;
+    //   mouse.y = ev.clientY + document.body.scrollTop;
+    // }
+    mouse.x = ev.pageX + window.pageXOffset;
+    mouse.y = ev.pageY - 130;
   }
 
   var mouse = {
