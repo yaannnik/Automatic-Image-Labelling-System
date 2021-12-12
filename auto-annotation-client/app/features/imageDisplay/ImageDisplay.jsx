@@ -20,9 +20,8 @@ import ImgItem from '../../dataStructure/ImgItem';
 // css
 import Styles from './ImageDisplay.css';
 
-// helper function
+// helper function: js
 import { initDraw } from './DrawFrameOn';
-import { DrawRectangle } from './drawFrame';
 
 // constants
 import * as imgSrc from '../../constants/img.json';
@@ -59,7 +58,8 @@ export default function AppIcon(props: { imgData: [] }) {
   const backgroundStyle = {
     backgroundImage: `url("${imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}")`,
     height: 256,
-    width: 256
+    width: 256,
+
   };
 
   const onUploadClick = () => {

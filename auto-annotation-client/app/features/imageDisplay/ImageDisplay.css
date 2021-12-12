@@ -1,9 +1,11 @@
 .backgroundImage {
   /* border: 1px solid #269ee4; */
-  background-size: 'contain';
+  background-size: 'auto';
   background-repeat: no-repeat;
   text-align: left;
   position: relative;
+  max-width:100%;
+max-height:100%;
   /* display: flex;
   align-items: flex-end; */
 }
