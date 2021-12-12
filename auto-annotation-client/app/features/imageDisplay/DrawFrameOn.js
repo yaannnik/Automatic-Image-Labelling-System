@@ -57,7 +57,7 @@ export function initDraw(id, candidate) {
       calculateCoordinate();
       candidate.push(
         new AnnotationItem(
-          "mask",
+          "",
           [
             dataReturn.startX,
             dataReturn.startY,

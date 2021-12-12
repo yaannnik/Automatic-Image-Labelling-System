@@ -52,7 +52,7 @@ export default function AppIcon(props: { imgData: [] }) {
   useEffect(() => {
     console.log(imgAnnotation);
     initDraw('bigimg', candidate);
-  }, [candidate, imgUpdated, imgAnnotation, open]);
+  }, [candidate, imgUpdated, imgAnnotation]);
 
   // style of div putting image
   const backgroundStyle = {
@@ -65,11 +65,6 @@ export default function AppIcon(props: { imgData: [] }) {
   const onUploadClick = () => {
     log.info('submit pic');
     log.info(imgUrl);
-    // setImgUpdated(new ImgItem(imgUrl, []));
-    // TODO: replace mock data with HTTP post
-    // setAnnotation(mockImageData());
-    log.info(mockImageData());
-    // setImgUpdated(new ImgItem(imgUrl, mockImageData(), 0, 0));
     const service = new ImgService();
     const rsp = service.getImage({ url: imgUrl });
     log.info(rsp);
@@ -94,9 +89,6 @@ export default function AppIcon(props: { imgData: [] }) {
         log.info(error);
       });
   };
-  const onInputChange = e => {
-    setImgUrl(e.target.value);
-  };
   const onSubmitChange = () => {
     log.info('change img', imgUpdated);
     log.info('whole data changed: ', imgData);
@@ -117,7 +109,7 @@ export default function AppIcon(props: { imgData: [] }) {
 
   // handle on confirm add bbox change
   const onAddFrame = () => {
-    if (candidate[1] === undefined) {
+    if (candidate[1] === undefined || candidate[1].category === '') {
       setOpen(false);
       return;
     }
@@ -160,7 +152,7 @@ export default function AppIcon(props: { imgData: [] }) {
                       open={open}
                       trigger={<Button color="green" >Add Annotation</Button>}
                     >
-                      <AddAnnotationModal candidate={candidate[1] === undefined? candidate[0]: candidate[1]} />
+                      <AddAnnotationModal candidate={candidate[1] === undefined ? candidate[0] : candidate[1]} />
                       <Modal.Actions>
                         <Button color="black" onClick={() => onCancelAddFrame()}>
                           Cancel
@@ -170,6 +162,7 @@ export default function AppIcon(props: { imgData: [] }) {
                           labelPosition="right"
                           icon="checkmark"
                           onClick={() => onAddFrame()}
+                          disabled={candidate[1] === undefined}
                           positive
                         />
                       </Modal.Actions>
