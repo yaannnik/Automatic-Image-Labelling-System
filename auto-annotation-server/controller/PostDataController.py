@@ -42,17 +42,12 @@ def postData():
                "shapes": [],
                "imagePath": url.split("/")[-1],
                "imageData": "Encoded",
-               "imageHeight": 0,
-               "imageWidth": 0,
+               "imageHeight": updated_data["height"],
+               "imageWidth": updated_data["width"],
                "lineColor": [0, 255, 0, 128],
                "fillColor": [255, 0, 0, 128]}
 
     for anno in annotations:
-        if anno["confidence"] == -100:
-            retdata["imageWidth"] = anno["bbox"][2]
-            retdata["imageHeight"] = anno["bbox"][3]
-            continue
-
         shape = {
             "line_color": None,
             "fill_color": None,
