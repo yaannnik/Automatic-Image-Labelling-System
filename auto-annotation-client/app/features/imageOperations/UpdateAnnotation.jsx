@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { Grid, Input, Icon, Button, Dropdown, Label, Divider } from 'semantic-ui-react';
+import { Grid, Input, Icon, Button, Dropdown, Segment, Divider, Form } from 'semantic-ui-react';
 import log from 'electron-log';
 
 // data structure
@@ -111,35 +111,37 @@ export default function UpdateAnnotation(props: {
         <Divider horizontal>Update bounding box</Divider>
         <br />
       </Grid.Row>
-      <Grid.Row>
-        <Input
-          onChange={onChangeUpperX}
-          icon={<Icon name="check" inverted circular link />}
-          placeholder="Input upper x" />
-      </Grid.Row>
-      <Grid.Row>
-        <Input
-          onChange={onChangeUpperY}
-          icon={<Icon name="check" inverted circular link />}
-          placeholder="Input upper y" />
-      </Grid.Row>
-      <Grid.Row>
-        <Input
-          onChange={onChangeLowerX}
-          icon={<Icon name="check" inverted circular link />}
-          placeholder="Input lower x" />
-      </Grid.Row>
-      <Grid.Row>
-        <Input
-          onChange={onChangeLowerY}
-          icon={<Icon name="check" inverted circular link />}
-          placeholder="Input lower y" />
-      </Grid.Row>
-      <Grid.Row>
-        <Button positive onClick={onConfirm}>
-          Confirm bounding box
-        </Button>
-      </Grid.Row>
+      <Form>
+        <Segment stacked>
+          <Form.Field>
+            <Divider horizontal>Left upper</Divider>
+            <Input
+              onChange={onChangeUpperX}
+              icon={<Icon name="check" inverted circular link />}
+              placeholder="Input upper x" />
+            <Input
+              onChange={onChangeUpperY}
+              icon={<Icon name="check" inverted circular link />}
+              placeholder="Input upper y" />
+          </Form.Field>
+          <Form.Field>
+            <Divider horizontal>Right bottom</Divider>
+            <Input
+              onChange={onChangeLowerX}
+              icon={<Icon name="check" inverted circular link />}
+              placeholder="Input lower x" />
+            <Input
+              onChange={onChangeLowerY}
+              icon={<Icon name="check" inverted circular link />}
+              placeholder="Input lower y" />
+            <Button positive floated='right' onClick={onConfirm}>
+              Confirm bounding box
+            </Button>
+          </Form.Field>
+          <Form.Field>
+          </Form.Field>
+        </Segment>
+      </Form>
       <Grid.Row>
         <ConfirmChangeBtn
           option={0}
