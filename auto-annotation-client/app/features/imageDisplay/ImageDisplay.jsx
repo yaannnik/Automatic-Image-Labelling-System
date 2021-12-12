@@ -69,7 +69,7 @@ export default function AppIcon(props: { imgData: [] }) {
     // TODO: replace mock data with HTTP post
     // setAnnotation(mockImageData());
     log.info(mockImageData());
-    setImgUpdated(new ImgItem(imgUrl, mockImageData(), 0, 0));
+    // setImgUpdated(new ImgItem(imgUrl, mockImageData(), 0, 0));
     const service = new ImgService();
     const rsp = service.getImage({ url: imgUrl });
     log.info(rsp);
@@ -89,7 +89,6 @@ export default function AppIcon(props: { imgData: [] }) {
         log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
-        setHeight(response.data.height);
       })
       .catch(error => {
         log.info(error);

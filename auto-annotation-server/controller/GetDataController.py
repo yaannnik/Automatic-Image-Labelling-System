@@ -26,7 +26,7 @@ def getData():
     user = User.query.filter_by(name=name).first()
     url = request.args.get("url")  # image url uploaded by
     # print(request.get_json())
-    # print(url)
+    print(url)
     # annos = []
     # data = request.get_json()
     imgs = []
