@@ -1,5 +1,5 @@
 // initDraw(document.getElementById("canvas"));
-import AnnotationItem from '../../dataStructure/AnnotationItem';
+import AnnotationItem from '../../../dataStructure/AnnotationItem';
 
 export function initDraw(id, candidate) {
   const canvas = document.getElementById(id);
@@ -68,6 +68,7 @@ export function initDraw(id, candidate) {
           1
         )
       );
+
       console.log(candidate);
     } else {
       console.log('begun.');

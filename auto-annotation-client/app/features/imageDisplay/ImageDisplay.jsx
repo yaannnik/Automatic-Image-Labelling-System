@@ -22,11 +22,12 @@ import ImageOperation from '../imageOperations/ImageOperation';
 import ImgItem from '../../dataStructure/ImgItem';
 
 // css
-import Styles from './ImageDisplay.css';
+import Styles from '../imageDisplay/css/ImageDisplay.css';
 
 // helper function: js
-import { initDraw } from './DrawFrameOn';
-import { DrawRectangle } from './drawFrame';
+import { initDraw } from '../imageDisplay/js/DrawFrameOn';
+import { DrawRectangle } from '../imageDisplay/js/drawFrame';
+import { clearRectangle } from '../imageDisplay/js/clearRectangle';
 
 // constants
 import * as imgSrc from '../../constants/img.json';
@@ -38,6 +39,7 @@ import mockImageData from '../../data/mockImageData';
 import ImageUpload from './ImageUpload';
 import ImageHistory from '../imageHistory/ImageHistory';
 import AddAnnotationModal from './AddAnnotationModal';
+import ClearRectangleModal from './ClearRectangleModal';
 
 // back end api service
 import ImgService from '../../utils/getService';
@@ -48,6 +50,7 @@ export default function AppIcon(props: { imgData: [] }) {
   // connection between front end and back end
   const { imgData, user } = props;
   const [open, setOpen] = useState(false);
+  const [openClear, setopenClear] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [imgAnnotation, setAnnotation] = useState([]);
   const [imgUpdated, setImgUpdated] = useState(new ImgItem(imgUrl, [], 0, 0));
@@ -57,6 +60,12 @@ export default function AppIcon(props: { imgData: [] }) {
   useEffect(() => {
     console.log(imgAnnotation);
     initDraw('bigimg', candidate);
+    imgAnnotation.map((annotationNew, index) => {
+      DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
+                              annotationNew.bbox[2] - annotationNew.bbox[0],
+                              annotationNew.bbox[3] - annotationNew.bbox[1],
+                              index);
+    });
   }, [candidate, imgUpdated, imgAnnotation]);
 
   // style of div putting image style="width:500px;height:100px;border:1px solid #000
@@ -84,11 +93,7 @@ export default function AppIcon(props: { imgData: [] }) {
             annotationNew.category,
             annotationNew.bbox,
             annotationNew.confidence));
-          DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
-                                  annotationNew.bbox[2] - annotationNew.bbox[0],
-                                  annotationNew.bbox[3] - annotationNew.bbox[1]);
         });
-
         log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
@@ -128,6 +133,10 @@ export default function AppIcon(props: { imgData: [] }) {
   const onCancelAddFrame = () => {
     setCandidate([new AnnotationItem('', [], -1)]);
     setOpen(false);
+  };
+  const onClearFrame = () => {
+    clearRectangle('rectangle');
+    setopenClear(false);
   };
   return (
     <div>
@@ -184,6 +193,28 @@ export default function AppIcon(props: { imgData: [] }) {
                           labelPosition="right"
                           icon="checkmark"
                           onClick={() => onAddFrame()}
+                          disabled={candidate[1] === undefined}
+                          positive
+                        />
+                      </Modal.Actions>
+                    </Modal>
+
+                    <Modal
+                      onClose={() => setopenClear(false)}
+                      onOpen={() => setopenClear(true)}
+                      open={openClear}
+                      trigger={<Button color="green" >Clear frames</Button>}
+                    >
+                      <ClearRectangleModal />
+                      <Modal.Actions>
+                        <Button color="black" onClick={() => setopenClear(false)}>
+                          Cancel
+                        </Button>
+                        <Button
+                          content="Yes"
+                          labelPosition="right"
+                          icon="checkmark"
+                          onClick={() => onClearFrame()}
                           disabled={candidate[1] === undefined}
                           positive
                         />
