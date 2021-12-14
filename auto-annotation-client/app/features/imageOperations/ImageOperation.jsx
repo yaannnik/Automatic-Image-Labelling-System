@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { Grid, Dropdown, Label } from 'semantic-ui-react';
@@ -18,7 +19,8 @@ type MyDropdown = {
 };
 
 export default function ImageOperation(props: { Annotations: AnnotationItem[], canEdit: boolean }) {
-  const { Annotations, canEdit } = props;
+  // eslint-disable-next-line react/prop-types
+  const { Annotations, canEdit} = props;
   const [option, setOption] = useState(-1);  // specify options on annotation: add, delete or update
   // -----------component data here --------------
   const objectOptions: MyDropdown[] = [
@@ -37,7 +39,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
     if (option === 0) {
       return (
         <AddAnnotation
-          addAnnoation={addAnnoation}
+          addAnnoation={props.addAnnoation}
         />
       );
     }
@@ -46,7 +48,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
       return (
         <DeleteAnnotaion
           annotations={Annotations}
-          deleteAnnotation={deleteAnnotation}
+          deleteAnnotation={props.deleteAnnotation}
         />
       );
     }
@@ -55,7 +57,7 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
       return (
         <UpdateAnnotation
           annotations={Annotations}
-          updateAnnotation={updateAnnotation}
+          updateAnnotation={props.updateAnnotation}
         />
       );
     }
@@ -64,39 +66,39 @@ export default function ImageOperation(props: { Annotations: AnnotationItem[], c
     );
   };
 
-  // handle changes on annotation
-  const addAnnoation = (imgItem) => {
-    if (imgItem.confidence !== -1) {
-      log.info('add new annotation: ', imgItem);
-      const index = Annotations.indexOf(imgItem);
-      if (index === -1) Annotations.push(imgItem);  // drop duplicate
-      log.info(Annotations);
-    }
-  };
+  // // handle changes on annotation
+  // const addAnnoation = (imgItem) => {
+  //   if (imgItem.confidence !== -1) {
+  //     log.info('add new annotation: ', imgItem);
+  //     const index = Annotations.indexOf(imgItem);
+  //     if (index === -1) Annotations.push(imgItem);  // drop duplicate
+  //     log.info(Annotations);
+  //   }
+  // };
 
-  // handle changes on delete annotation
-  const deleteAnnotation = (imgItem) => {
-    if (imgItem.confidence !== -1) {
-      log.info('delete existed annotation: ', imgItem);
-      const index = Annotations.indexOf(imgItem);
-      if (index !== -1) {
-        Annotations.splice(index, 1);
-      }
-      log.info(Annotations);
-    }
-  };
+  // // handle changes on delete annotation
+  // const deleteAnnotation = (imgItem) => {
+  //   if (imgItem.confidence !== -1) {
+  //     log.info('delete existed annotation: ', imgItem);
+  //     const index = Annotations.indexOf(imgItem);
+  //     if (index !== -1) {
+  //       Annotations.splice(index, 1);
+  //     }
+  //     log.info(Annotations);
+  //   }
+  // };
 
-  // handle changes on update annotation
-  const updateAnnotation = (imgItem) => {
-    if (imgItem.confidence !== -1) {
-      log.info('update existed annotation: ', imgItem);
-      const index = Annotations.indexOf(imgItem);
-      if (index !== -1) {
-        Annotations[index] = imgItem;
-      }
-      log.info(Annotations);
-    }
-  };
+  // // handle changes on update annotation
+  // const updateAnnotation = (imgItem) => {
+  //   if (imgItem.confidence !== -1) {
+  //     log.info('update existed annotation: ', imgItem);
+  //     const index = Annotations.indexOf(imgItem);
+  //     if (index !== -1) {
+  //       Annotations[index] = imgItem;
+  //     }
+  //     log.info(Annotations);
+  //   }
+  // };
 
   return (
     <Grid columns={2} padded="vertically">

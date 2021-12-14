@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Header, Message, Dropdown } from 'semantic-ui-react';
 
 
 export default function AddAnnotationModal(props) {
-  const { candidate } = props;
+  const { candidates } = props;
+  const [category, setCategory] = useState('');
   useEffect(() => {
 
-  }, [candidate]);
+  }, [candidates]);
   // ----------dropdown options here--------------
   const categoryOptions = [
     {
@@ -23,7 +24,7 @@ export default function AddAnnotationModal(props) {
     },
   ];
   const ChangeInformation = () => {
-    if (candidate.confidence === -1) {
+    if (candidates[1] === undefined) {
       return (
         <Message negative>
           No frame selected, please add a frame:)
@@ -31,18 +32,26 @@ export default function AddAnnotationModal(props) {
       );
     }
     return (
-      <Message positive>
-        Add a new annotation
-        <br />
-        Note: {candidate.category === '' ? 'Please specify a category, you cannot submit without specifying a category' : candidate.category}
-        <br />
-        Bounding box: ({candidate.bbox[0]}, {candidate.bbox[1]}), ({candidate.bbox[2]}, {candidate.bbox[3]}).
-      </Message>
+      candidates.map((candidate) => {
+        if (candidate.confidence !== -100) {
+          return (<Message positive>
+            Add a new annotation
+            <br />
+            Note: {candidate.category === '' ? 'Please specify a category, you cannot submit without specifying a category' : candidate.category}
+            <br />
+            Bounding box: ({candidate.bbox[0]}, {candidate.bbox[1]}), ({candidate.bbox[2]}, {candidate.bbox[3]}).
+          </Message>);
+        }
+      })
+
     );
   };
   // handle on dropdown change
   const categoryChange = (e, selection) => {
-    candidate.category = selection.value;
+    setCategory(selection.value);
+    candidates.map(candidate => {
+      candidate.category = selection.value;
+    });
   };
   return (
     <Modal.Content image>
