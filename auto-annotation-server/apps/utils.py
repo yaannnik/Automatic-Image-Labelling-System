@@ -79,12 +79,12 @@ def predImages(imgs, vis, name):
         img_label = img.split("/")[-1]
         img_label = img_label.split(".")[0]
         img_label = sys.path[0] + "/../users/%s/data/" % name + img_label + '.jpeg'
-        print(img_label)
+        # print(img_label)
         # cv2.namedWindow("WINDOW_NAME", cv2.WINDOW_NORMAL)
         # cv2.imshow("WINDOW_NAME", visualized_output.get_image()[:, :, ::-1])
         # if cv2.waitKey(0) == 27:
         #     break  # esc to quit
-        cv2.imwrite(img_label, visualized_output.get_image()[:, :, ::-1])
+        cv2.imwrite(img_label, data)
 
         # img: url of the image
         preds.append(([img_label, height, width], predictions))
