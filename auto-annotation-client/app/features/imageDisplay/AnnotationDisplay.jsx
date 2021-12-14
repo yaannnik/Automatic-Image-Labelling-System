@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 // debug console output

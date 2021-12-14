@@ -1,7 +1,9 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/prop-types */
 /* eslint-disable promise/always-return */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Form, Button, Header, Message, Image, Segment, Modal } from 'semantic-ui-react';
 import log from 'electron-log';
 
@@ -40,7 +42,6 @@ export default function Login(props) {
   };
   // check the password persistence
   const CheckMessage = () => {
-
     if (loginStatus === 0) {
       return (
         <Message

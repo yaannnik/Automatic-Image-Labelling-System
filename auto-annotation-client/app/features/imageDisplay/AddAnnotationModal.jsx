@@ -1,13 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
-import { Modal, Header, Message, Grid, Dropdown } from 'semantic-ui-react';
+import { Modal, Header, Message, Dropdown } from 'semantic-ui-react';
 
-// data structure
-import AnnotationItem from '../../dataStructure/AnnotationItem';
 
-export default function AddAnnotationModal(props: {
-  candidate: AnnotationItem
-}) {
+export default function AddAnnotationModal(props) {
   const { candidate } = props;
   useEffect(() => {
 
@@ -51,18 +48,18 @@ export default function AddAnnotationModal(props: {
     <Modal.Content image>
       <Modal.Description>
         <Header>Option Confirmation</Header>
-            <Dropdown
-              placeholder="Choose an category"
-              fluid
-              selection
-              clearable
-              options={categoryOptions}
-              onChange={categoryChange}
-            />
-            <p>
-              Do you want to do the following changes?
-            </p>
-            <ChangeInformation />
+        <Dropdown
+          placeholder="Choose an category"
+          fluid
+          selection
+          clearable
+          options={categoryOptions}
+          onChange={categoryChange}
+        />
+        <p>
+          Do you want to do the following changes?
+        </p>
+        <ChangeInformation />
 
       </Modal.Description>
     </Modal.Content>

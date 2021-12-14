@@ -8,7 +8,7 @@ import log from 'electron-log';
 // back end api service
 import ImgService from '../../utils/getService';
 
-export default function UserInfo(props) {
+export default function UserInfo() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repassword, setRePassword] = useState('');

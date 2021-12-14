@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-param-reassign */
 // debug console output
 import log from 'electron-log';
@@ -25,6 +26,7 @@ import Styles from './ImageDisplay.css';
 
 // helper function: js
 import { initDraw } from './DrawFrameOn';
+import { DrawRectangle } from './drawFrame';
 
 // constants
 import * as imgSrc from '../../constants/img.json';
@@ -57,11 +59,11 @@ export default function AppIcon(props: { imgData: [] }) {
     initDraw('bigimg', candidate);
   }, [candidate, imgUpdated, imgAnnotation]);
 
-  // style of div putting image
+  // style of div putting image style="width:500px;height:100px;border:1px solid #000
   const backgroundStyle = {
     backgroundImage: `url("${imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}")`,
     height: 256,
-    width: 256,
+    width: 256
 
   };
 
@@ -76,14 +78,17 @@ export default function AppIcon(props: { imgData: [] }) {
         imgUpdated.url = response.data.url;
         imgUpdated.height = response.data.height;
         imgUpdated.width = response.data.width;
-        const annotationNew = response.data.annotation[0];
-        imgUpdated.annotation = [
-          new AnnotationItem(
+        imgUpdated.annotation = [];
+        response.data.annotation.map((annotationNew) => {
+          imgUpdated.annotation.push(new AnnotationItem(
             annotationNew.category,
             annotationNew.bbox,
-            annotationNew.confidence
-          )
-        ];
+            annotationNew.confidence));
+          DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
+                                  annotationNew.bbox[2] - annotationNew.bbox[0],
+                                  annotationNew.bbox[3] - annotationNew.bbox[1]);
+        });
+
         log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
@@ -127,15 +132,15 @@ export default function AppIcon(props: { imgData: [] }) {
   return (
     <div>
       <Dimmer active={user === ''} >
-        <Header as='h2' icon inverted>
-          <Icon name='heart' />
+        <Header as="h2" icon inverted>
+          <Icon name="heart" />
           Please switch to the Login tab to login
           <Header.Subheader>User does not login</Header.Subheader>
         </Header>
       </Dimmer>
-      <Label as='a' color='green' floating ribbon='right' image>
-        <img src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
-        User: {user === '' ? "not login" : user}
+      <Label as="a" color="green" floating ribbon="right" image>
+        <img src="https://react.semantic-ui.com/images/avatar/small/christian.jpg" />
+        User: {user === '' ? 'not login' : user}
         <Label.Detail>Log out</Label.Detail>
       </Label>
       <br />

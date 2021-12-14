@@ -1,8 +1,9 @@
 // initDraw(document.getElementById("canvas"));
-import AnnotationItem from "../../dataStructure/AnnotationItem";
+import AnnotationItem from '../../dataStructure/AnnotationItem';
 
 export function initDraw(id, candidate) {
   const canvas = document.getElementById(id);
+  // const ctx = c.getContext('2d');
   let dataReturn = {};
 
   function calculateCoordinate() {
@@ -29,7 +30,7 @@ export function initDraw(id, candidate) {
     mouse.y = ev.pageY - 140;
   }
 
-  var mouse = {
+  let mouse = {
     x: 0,
     y: 0,
     startX: 0,
@@ -37,7 +38,7 @@ export function initDraw(id, candidate) {
   };
   let element = null;
 
-  canvas.onmousemove = function(e) {
+  canvas.onmousemove = function (e) {
     setMousePosition(e);
     if (element !== null) {
       element.style.width = `${Math.abs(mouse.x - mouse.startX)}px`;
@@ -49,15 +50,15 @@ export function initDraw(id, candidate) {
     }
   };
 
-  canvas.onclick = function(e) {
+  canvas.onclick = function () {
     if (element !== null) {
       element = null;
-      canvas.style.cursor = "default";
-      console.log("finsihed.");
+      canvas.style.cursor = 'default';
+      console.log('finsihed.');
       calculateCoordinate();
       candidate.push(
         new AnnotationItem(
-          "",
+          '',
           [
             dataReturn.startX,
             dataReturn.startY,
@@ -69,24 +70,24 @@ export function initDraw(id, candidate) {
       );
       console.log(candidate);
     } else {
-      console.log("begun.");
+      console.log('begun.');
       mouse.startX = mouse.x;
       mouse.startY = mouse.y;
-      element = document.createElement("div");
-      element.className = "rectangle";
+      element = document.createElement('div');
+      element.className = 'rectangle';
       // this.masker.appendChild(element);
-      element.style.border = "1px solid #ff0000";
+      element.style.border = '1px solid #ff0000';
       element.style.width = 0;
       element.style.height = 0;
-      element.style.overflow = "hidden";
-      element.style.position = "absolute";
+      element.style.overflow = 'hidden';
+      element.style.position = 'absolute';
       element.style.opacity = 0.5;
 
-      element.style["z-index"] = 2;
+      element.style['z-index'] = 2;
       element.style.left = `${mouse.x}px`;
       element.style.top = `${mouse.y}px`;
       canvas.appendChild(element);
-      canvas.style.cursor = "crosshair";
+      canvas.style.cursor = 'crosshair';
     }
   };
   return dataReturn;
