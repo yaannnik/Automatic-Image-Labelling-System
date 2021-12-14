@@ -9,6 +9,9 @@ import { Icon, Label, Card, Popup, Modal, Button } from 'semantic-ui-react';
 // internal components
 import OptionConfirmation from '../imageOperations/OptionConfirmation';
 
+// js helper function
+import { removeRectangle } from './js/removeFrame';
+
 export default function AnnotationDisplay(props) {
   const {
     annotation, Annotations
@@ -44,6 +47,7 @@ export default function AnnotationDisplay(props) {
       const index = Annotations.indexOf(imgItem);
       if (index !== -1) {
         Annotations.splice(index, 1);
+        removeRectangle(index);
       }
       log.info(Annotations);
     }

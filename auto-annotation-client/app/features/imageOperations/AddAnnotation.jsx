@@ -48,12 +48,6 @@ export default function AddAnnotation(props: {
   const onConfirm = () => {
     log.info('set new bbox...');
     log.info([inputUpperX, inputUpperY, inputLowerX, inputLowerY]);
-    console.log(localStorage.masker);
-    // TODO: add frame on image
-    // let ctx = localStorage.masker.getContext("2d");
-    // ctx.beginPath();
-    // ctx.rect(20, 20, 150, 100);
-    // ctx.stroke();
     annotationSelected.bbox = [inputUpperX, inputUpperY, inputLowerX, inputLowerY];
     setAnnotationSelected(annotationSelected);
   };

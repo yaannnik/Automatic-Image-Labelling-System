@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-param-reassign */
 // debug console output
@@ -22,36 +23,37 @@ import ImageOperation from '../imageOperations/ImageOperation';
 import ImgItem from '../../dataStructure/ImgItem';
 
 // css
-import Styles from './ImageDisplay.css';
+import Styles from '../imageDisplay/css/ImageDisplay.css';
 
 // helper function: js
-import { initDraw } from './DrawFrameOn';
-import { DrawRectangle } from './drawFrame';
+import { initDraw } from '../imageDisplay/js/DrawFrameOn';
+import { DrawRectangle } from '../imageDisplay/js/drawFrame';
+import { clearRectangle } from '../imageDisplay/js/clearRectangle';  // clear all frames
+import { removeRectangle } from './js/removeFrame';  // clear one single frame
 
 // constants
 import * as imgSrc from '../../constants/img.json';
-
-// TODO: replace mockData for image item
-import mockImageData from '../../data/mockImageData';
 
 // internal component
 import ImageUpload from './ImageUpload';
 import ImageHistory from '../imageHistory/ImageHistory';
 import AddAnnotationModal from './AddAnnotationModal';
+import ClearRectangleModal from './ClearRectangleModal';
 
 // back end api service
 import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
 import AnnotationDisplay from './AnnotationDisplay';
 
-export default function AppIcon(props: { imgData: [] }) {
+export default function AppIcon(props: { imgData: [], user: string }) {
   // connection between front end and back end
   const { imgData, user } = props;
   const [open, setOpen] = useState(false);
+  const [openClear, setopenClear] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [imgAnnotation, setAnnotation] = useState([]);
   const [imgUpdated, setImgUpdated] = useState(new ImgItem(imgUrl, [], 0, 0));
-  const [candidate, setCandidate] = useState([new AnnotationItem('', [], -1)]);
+  const [candidate, setCandidate] = useState([new AnnotationItem('', [], -100)]);
 
 
   useEffect(() => {
@@ -79,19 +81,21 @@ export default function AppIcon(props: { imgData: [] }) {
         imgUpdated.height = response.data.height;
         imgUpdated.width = response.data.width;
         imgUpdated.annotation = [];
-        response.data.annotation.map((annotationNew) => {
+        response.data.annotation.map((annotationNew, index) => {
           imgUpdated.annotation.push(new AnnotationItem(
             annotationNew.category,
             annotationNew.bbox,
             annotationNew.confidence));
           DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
-                                  annotationNew.bbox[2] - annotationNew.bbox[0],
-                                  annotationNew.bbox[3] - annotationNew.bbox[1]);
+            annotationNew.bbox[2] - annotationNew.bbox[0],
+            annotationNew.bbox[3] - annotationNew.bbox[1],
+            index);
+            console.log(index);
         });
-
         log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
+        return response;
       })
       .catch(error => {
         log.info(error);
@@ -109,6 +113,7 @@ export default function AppIcon(props: { imgData: [] }) {
     rsp
       .then(response => {
         log.info(response);
+        return response;
       })
       .catch(error => {
         log.info(error);
@@ -121,13 +126,68 @@ export default function AppIcon(props: { imgData: [] }) {
       setOpen(false);
       return;
     }
-    setCandidate([new AnnotationItem('', [], -1)]);
-    imgAnnotation.push(candidate[1]);
+    setCandidate([new AnnotationItem('', [], -100)]);
+    candidate.map((annotationNew) => {
+      if (annotationNew.confidence !== -100) {
+        DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
+          annotationNew.bbox[2] - annotationNew.bbox[0],
+          annotationNew.bbox[3] - annotationNew.bbox[1],
+          imgAnnotation.length);
+        imgAnnotation.push(annotationNew);
+      }
+    });
+
     setOpen(false);
   };
   const onCancelAddFrame = () => {
-    setCandidate([new AnnotationItem('', [], -1)]);
+    setCandidate([new AnnotationItem('', [], -100)]);
     setOpen(false);
+  };
+  const onClearFrame = () => {
+    clearRectangle('rectangle');
+    setopenClear(false);
+  };
+
+  // ----------------annotation options here----------
+  // handle changes on annotation
+  const addAnnoation = (imgItem) => {
+    if (imgItem.confidence !== -1) {
+      log.info('add new annotation: ', imgItem);
+      const index = imgAnnotation.indexOf(imgItem);
+      if (index === -1 && imgItem.bbox.length !== 0) {
+        imgAnnotation.push(imgItem);
+        DrawRectangle('bigimg', imgItem.bbox[0], imgItem.bbox[1],
+          imgItem.bbox[2] - imgItem.bbox[0],
+          imgItem.bbox[3] - imgItem.bbox[1],
+          imgAnnotation.length);
+      }  // drop duplicate
+      log.info(imgAnnotation);
+    }
+  };
+
+  // handle changes on delete annotation
+  const deleteAnnotation = (imgItem) => {
+    if (imgItem.confidence !== -1) {
+      log.info('delete existed annotation: ', imgItem);
+      const index = imgAnnotation.indexOf(imgItem);
+      if (index !== -1) {
+        imgAnnotation.splice(index, 1);
+        removeRectangle(index);
+      }
+      log.info(imgAnnotation);
+    }
+  };
+
+  // handle changes on update annotation
+  const updateAnnotation = (imgItem) => {
+    if (imgItem.confidence !== -1) {
+      log.info('update existed annotation: ', imgItem);
+      const index = imgAnnotation.indexOf(imgItem);
+      if (index !== -1) {
+        imgAnnotation[index] = imgItem;
+      }
+      log.info(imgAnnotation);
+    }
   };
   return (
     <div>
@@ -139,7 +199,7 @@ export default function AppIcon(props: { imgData: [] }) {
         </Header>
       </Dimmer>
       <Label as="a" color="green" floating ribbon="right" image>
-        <img src="https://react.semantic-ui.com/images/avatar/small/christian.jpg" />
+        <img src="https://react.semantic-ui.com/images/avatar/small/christian.jpg" alt="profile" />
         User: {user === '' ? 'not login' : user}
         <Label.Detail>Log out</Label.Detail>
       </Label>
@@ -156,12 +216,6 @@ export default function AppIcon(props: { imgData: [] }) {
                   </Label>
                   <p> </p>
                   <Grid.Row>
-                    {/* ?can be deleted later */}
-                    {/* <Image
-                      id="bigimg"
-                      src={imgUpdated.url === '' ? imgSrc.hold : imgUpdated.url}
-                      centered
-                    /> */}
                     <div
                       id="bigimg"
                       style={backgroundStyle}
@@ -174,7 +228,7 @@ export default function AppIcon(props: { imgData: [] }) {
                       open={open}
                       trigger={<Button color="green" >Add Annotation</Button>}
                     >
-                      <AddAnnotationModal candidate={candidate[1] === undefined ? candidate[0] : candidate[1]} />
+                      <AddAnnotationModal candidates={candidate} />
                       <Modal.Actions>
                         <Button color="black" onClick={() => onCancelAddFrame()}>
                           Cancel
@@ -184,6 +238,28 @@ export default function AppIcon(props: { imgData: [] }) {
                           labelPosition="right"
                           icon="checkmark"
                           onClick={() => onAddFrame()}
+                          disabled={candidate[1] === undefined}
+                          positive
+                        />
+                      </Modal.Actions>
+                    </Modal>
+
+                    <Modal
+                      onClose={() => setopenClear(false)}
+                      onOpen={() => setopenClear(true)}
+                      open={openClear}
+                      trigger={<Button color="green" >Clear frames</Button>}
+                    >
+                      <ClearRectangleModal />
+                      <Modal.Actions>
+                        <Button color="black" onClick={() => setopenClear(false)}>
+                          Cancel
+                        </Button>
+                        <Button
+                          content="Yes"
+                          labelPosition="right"
+                          icon="checkmark"
+                          onClick={() => onClearFrame()}
                           disabled={candidate[1] === undefined}
                           positive
                         />
@@ -207,6 +283,9 @@ export default function AppIcon(props: { imgData: [] }) {
                   <ImageOperation
                     Annotations={imgAnnotation}
                     canEdit={imgUpdated.url !== ''}
+                    addAnnoation={addAnnoation}
+                    deleteAnnotation={deleteAnnotation}
+                    updateAnnotation={updateAnnotation}
                   />
                 </Grid.Column>
               </Grid.Row>

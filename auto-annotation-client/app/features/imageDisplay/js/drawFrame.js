@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
-export function DrawRectangle(id, left, top, width, height) {
+
+/* eslint-disable import/prefer-default-export */
+export function DrawRectangle(id, left, top, width, height, index) {
   const canvas = document.getElementById(id);
   const element = document.createElement('div');
+  console.log("draw new frame");
+  element.setAttribute('id', `${index}`);
   element.className = 'rectangle';
   element.style.border = '1px solid #ff0000';
   element.style.width = 0;
@@ -17,3 +21,4 @@ export function DrawRectangle(id, left, top, width, height) {
   element.style.height = `${height}px`;
   canvas.appendChild(element);
 }
+
