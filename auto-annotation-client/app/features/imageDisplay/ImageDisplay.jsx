@@ -90,6 +90,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
             annotationNew.bbox[2] - annotationNew.bbox[0],
             annotationNew.bbox[3] - annotationNew.bbox[1],
             index);
+            console.log(index);
         });
         log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
