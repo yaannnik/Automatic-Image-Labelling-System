@@ -14,7 +14,7 @@ import { removeRectangle } from './js/removeFrame';
 
 export default function AnnotationDisplay(props) {
   const {
-    annotation, Annotations
+    annotation, Annotations, imgIdx
   } = props;
   const [open, setOpen] = useState(false);  // modal window control
   // tag status in tag header
@@ -45,9 +45,13 @@ export default function AnnotationDisplay(props) {
     if (imgItem.confidence !== -1) {
       log.info('delete existed annotation: ', imgItem);
       const index = Annotations.indexOf(imgItem);
+      log.info("delete imgannotation from frame");
+      log.info(index);
+      log.info(imgIdx[index]);
       if (index !== -1) {
         Annotations.splice(index, 1);
-        removeRectangle(index);
+        removeRectangle(imgIdx[index]);
+        imgIdx.splice(index, 1);
       }
       log.info(Annotations);
     }

@@ -6,6 +6,8 @@ export function DrawRectangle(id, left, top, width, height, index) {
   const element = document.createElement('div');
   console.log("draw new frame");
   element.setAttribute('id', `${index}`);
+  console.log('add id');
+  console.log(index);
   element.className = 'rectangle';
   element.style.border = '1px solid #ff0000';
   element.style.width = 0;

@@ -28,6 +28,7 @@ import Styles from '../imageDisplay/css/ImageDisplay.css';
 // helper function: js
 import { initDraw } from '../imageDisplay/js/DrawFrameOn';
 import { DrawRectangle } from '../imageDisplay/js/drawFrame';
+import { UpdateRectangle } from './js/updateRectangle';  // update an existed frame
 import { clearRectangle } from '../imageDisplay/js/clearRectangle';  // clear all frames
 import { removeRectangle } from './js/removeFrame';  // clear one single frame
 
@@ -52,6 +53,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
   const [openClear, setopenClear] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [imgAnnotation, setAnnotation] = useState([]);
+  const [imgIdx, setImgIdx] = useState([]);  // id of the annonation in the imgAnnotation corresponding position
   const [imgUpdated, setImgUpdated] = useState(new ImgItem(imgUrl, [], 0, 0));
   const [candidate, setCandidate] = useState([new AnnotationItem('', [], -100)]);
 
@@ -75,31 +77,36 @@ export default function AppIcon(props: { imgData: [], user: string }) {
     const service = new ImgService();
     const rsp = service.getImage({ url: imgUrl });
     log.info(rsp);
-    rsp
-      .then(response => {
-        imgUpdated.url = response.data.url;
-        imgUpdated.height = response.data.height;
-        imgUpdated.width = response.data.width;
-        imgUpdated.annotation = [];
-        response.data.annotation.map((annotationNew, index) => {
-          imgUpdated.annotation.push(new AnnotationItem(
-            annotationNew.category,
-            annotationNew.bbox,
-            annotationNew.confidence));
-          DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
-            annotationNew.bbox[2] - annotationNew.bbox[0],
-            annotationNew.bbox[3] - annotationNew.bbox[1],
-            index);
-            console.log(index);
-        });
-        log.info(imgUpdated);
+    // eslint-disable-next-line promise/catch-or-return
+    rsp.then(response => {
+      imgUpdated.url = response.data.url;
+      imgUpdated.height = response.data.height;
+      imgUpdated.width = response.data.width;
+      imgUpdated.annotation = [];
+      response.data.annotation.map((annotationNew) => {
+        const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
+        imgUpdated.annotation.push(new AnnotationItem(
+                                  annotationNew.category,
+                                  annotationNew.bbox,
+                                  annotationNew.confidence));
+        DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
+                      annotationNew.bbox[2] - annotationNew.bbox[0],
+                      annotationNew.bbox[3] - annotationNew.bbox[1],
+                      id);
+        // record id
+        imgIdx.push(id);
+        // log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
+        log.info("add imgannotation from request");
+        log.info(imgAnnotation);
+        log.info(imgIdx);
         return response;
       })
       .catch(error => {
         log.info(error);
       });
+    });
   };
   const onSubmitChange = () => {
     log.info('change img', imgUpdated);
@@ -129,12 +136,18 @@ export default function AppIcon(props: { imgData: [], user: string }) {
     setCandidate([new AnnotationItem('', [], -100)]);
     candidate.map((annotationNew) => {
       if (annotationNew.confidence !== -100) {
+        const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
         DrawRectangle('bigimg', annotationNew.bbox[0], annotationNew.bbox[1],
           annotationNew.bbox[2] - annotationNew.bbox[0],
           annotationNew.bbox[3] - annotationNew.bbox[1],
-          imgAnnotation.length);
+          id);
         imgAnnotation.push(annotationNew);
+        // record id
+        imgIdx.push(id);
       }
+      log.info("add imgannotation from frame");
+      log.info(imgAnnotation);
+      log.info(imgIdx);
     });
 
     setOpen(false);
@@ -155,13 +168,18 @@ export default function AppIcon(props: { imgData: [], user: string }) {
       log.info('add new annotation: ', imgItem);
       const index = imgAnnotation.indexOf(imgItem);
       if (index === -1 && imgItem.bbox.length !== 0) {
+        const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
         imgAnnotation.push(imgItem);
         DrawRectangle('bigimg', imgItem.bbox[0], imgItem.bbox[1],
           imgItem.bbox[2] - imgItem.bbox[0],
           imgItem.bbox[3] - imgItem.bbox[1],
-          imgAnnotation.length);
+          id);
+          // record id
+        imgIdx.push(id);
       }  // drop duplicate
+      log.info("add imgannotation from dropdown");
       log.info(imgAnnotation);
+      log.info(imgIdx);
     }
   };
 
@@ -170,11 +188,14 @@ export default function AppIcon(props: { imgData: [], user: string }) {
     if (imgItem.confidence !== -1) {
       log.info('delete existed annotation: ', imgItem);
       const index = imgAnnotation.indexOf(imgItem);
+      log.info("delete imgannotation from dropdown");
+      log.info(index);
+      log.info(imgIdx[index]);
       if (index !== -1) {
         imgAnnotation.splice(index, 1);
-        removeRectangle(index);
+        removeRectangle(imgIdx[index]);
+        imgIdx.splice(index, 1);
       }
-      log.info(imgAnnotation);
     }
   };
 
@@ -184,6 +205,9 @@ export default function AppIcon(props: { imgData: [], user: string }) {
       log.info('update existed annotation: ', imgItem);
       const index = imgAnnotation.indexOf(imgItem);
       if (index !== -1) {
+        UpdateRectangle(imgIdx[index], imgItem.bbox[0], imgItem[1],
+                        imgItem.bbox[2] - imgItem.bbox[1],
+                        imgItem.bbox[3] - imgItem.bbox[1]);
         imgAnnotation[index] = imgItem;
       }
       log.info(imgAnnotation);
@@ -272,6 +296,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
                       <AnnotationDisplay
                         annotation={annotation}
                         Annotations={imgAnnotation}
+                        imgIdx={imgIdx}
                       />
                     ))}
                   </Grid.Column>
