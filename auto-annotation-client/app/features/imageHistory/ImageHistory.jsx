@@ -16,7 +16,7 @@ export default function ImageHistory(props: any) {
     },
     {
       childKey: 1,
-      image: 'Images/WechatIMG471.jpeg',
+      image: 'Images/WechatIMG512.jpeg',
       header: 'Header',
       description: 'Mask',
       meta: 'Width',

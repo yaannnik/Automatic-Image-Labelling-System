@@ -9,7 +9,7 @@ Final Project of ELEN6893@Columbia University: Automatic Image Labelling System
 - **Linux or macOS with Python ≥ 3.6**
 - **[PyTorch](https://pytorch.org/) ≥ 1.8 and [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch installation**
 - **OpenCV is strongly recommended**
-- **a [node](https://nodejs.org/en/) version >= 7 and an [npm](https://www.npmjs.com/) version >= 4.**
+- **a [node](https://nodejs.org/en/) version ≥ 7 and an [npm](https://www.npmjs.com/) version ≥ 4**
 - **If you have installation or compilation issues with this project, please see [electron's official debugging guide](https://github.com/chentsulin/electron-react-boilerplate/issues/400)**
 
 Install dependencies with yarn.
