@@ -83,6 +83,9 @@ export default function AppIcon(props: { imgData: [], user: string }) {
       imgUpdated.height = response.data.height;
       imgUpdated.width = response.data.width;
       imgUpdated.annotation = [];
+      // clear cached data
+      clearRectangle('rectangle');
+      setCandidate([new AnnotationItem('', [], -100)]);
       response.data.annotation.map((annotationNew) => {
         const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
         imgUpdated.annotation.push(new AnnotationItem(
@@ -284,7 +287,6 @@ export default function AppIcon(props: { imgData: [], user: string }) {
                           labelPosition="right"
                           icon="checkmark"
                           onClick={() => onClearFrame()}
-                          disabled={candidate[1] === undefined}
                           positive
                         />
                       </Modal.Actions>
