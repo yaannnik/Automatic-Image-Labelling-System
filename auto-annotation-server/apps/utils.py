@@ -141,7 +141,7 @@ def getPredResult(preds):
             y1 = pred_boxes.tensor[i, 1].clamp(min=0, max=height).item()
             x2 = pred_boxes.tensor[i, 2].clamp(min=0, max=width).item()
             y2 = pred_boxes.tensor[i, 3].clamp(min=0, max=height).item()
-            pred_box = [x1, y1, x2, y2]
+            pred_box = [int(x1), int(y1), int(x2), int(y2)]
 
             print("Object " + COCO_CATEGORIES[pred_class]["name"] \
                             + " with score of " + str(score) \
