@@ -94,8 +94,9 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
       // clear cached data
       clearRectangle('rectangle');
       setCandidate([new AnnotationItem('', [], -100)]);
+      imgIdx.length = 0;
       response.data.annotation.map((annotationNew) => {
-        const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
+        const id = imgIdx.length == 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
         imgUpdated.annotation.push(new AnnotationItem(
                                   annotationNew.category,
                                   annotationNew.bbox,
@@ -214,14 +215,17 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
     if (imgItem.confidence !== -1) {
       log.info('update existed annotation: ', imgItem);
       const index = imgAnnotation.indexOf(imgItem);
+      log.info('index: ', index);
       if (index !== -1) {
-        UpdateRectangle(imgIdx[index], imgItem.bbox[0], imgItem[1],
-                        imgItem.bbox[2] - imgItem.bbox[1],
+        console.log(imgIdx);
+        UpdateRectangle(imgIdx[index], imgItem.bbox[0], imgItem.bbox[1],
+                        imgItem.bbox[2] - imgItem.bbox[0],
                         imgItem.bbox[3] - imgItem.bbox[1]);
         imgAnnotation[index] = imgItem;
       }
       log.info(imgAnnotation);
     }
+
   };
   return (
     <div>
