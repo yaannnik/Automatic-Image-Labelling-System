@@ -27,15 +27,25 @@ $ npm install
 
 ### Build Detectron2
 
-Our deep learning engine is based on [Detectron2](https://github.com/facebookresearch/detectron2). Run `install.sh` to install Detectron2. Set environmental variable `$DETECTRON2_DATASETS` to be path to your dataset.
+Our deep learning engine is based on [Detectron2](https://github.com/facebookresearch/detectron2). Run [install.sh](install.sh) to install Detectron2. Set environmental variable `$DETECTRON2_DATASETS` to be path to your dataset.
 
 
 
 ## Getting Started
 
+### Train your model
+
+If it is the first time you use our automatic labelling system, you will need to train a basic model to make it work for you. Make sure your dataset is in COCO format. You can use [labelme_to_coco.py](auto-annotation-server/detectron2/tools/datasets/labelme_to_coco.py) to transform your labelme dataset into a COCO dataset.
+
+Run [train.sh](train.sh) to start training process. Feel free to change the network according to your requirements.
+
+*If you would like to train your model using your own dataset with your designed categories, you will need to change the COCO_CATEGORIES in [builtin_meta.py](auto-annotation-server/detectron2/detectron2/data/datasets/builtin_meta.py)
+
+
+
 ### Start front-end and back-end of our app
 
-Use `start-frontend.sh` and `start-backend.sh` to start the front-end and back-end of our app.
+Use [start-frontend.sh](start-frontend.sh) and [start-backend.sh](start-backend.sh) to start the front-end and back-end of our app.
 
 
 
@@ -47,9 +57,8 @@ To use your unique model and settings, sign up/login with your account first.
 
 
 
-### Train your model
+### Settings
 
-If it is the first time you use our automatic labelling system, you will need to train a basic model to make it work for you. Make sure your dataset is in COCO format. You can use `auto-annotation-server/detectron2/tools/datasets/labelme_to_coco.py` to transform your labelme dataset into a COCO dataset.
+Upload your customized config file and model to label your data via our settings panel.
 
-Run `train.sh` to start training process. Feel free to change the network according to your requirements.
-
+<img src="./figures/settings.png" alt="Settings" style="zoom:40%;" />
