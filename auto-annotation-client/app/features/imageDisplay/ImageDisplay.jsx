@@ -46,6 +46,9 @@ import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
 import AnnotationDisplay from './AnnotationDisplay';
 
+
+var imglist = {};
+
 export default function ImageDisplay(props: { imgData: [], user: string }) {
   // connection between front end and back end
   const { imgData, user } = props;
@@ -76,6 +79,11 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
     log.info(imgUrl);
     const service = new ImgService();
     const rsp = service.getImage({ url: imgUrl });
+    imglist[2] = imglist[1];
+    imglist[1] = imglist[0];
+    imglist[0] = imgUrl;
+
+
     log.info(rsp);
     // eslint-disable-next-line promise/catch-or-return
     rsp.then(response => {
@@ -325,7 +333,7 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
           </div>
         </Grid.Column>
         <Grid.Column computer={4} largeScreen={4} widescreen={4}>
-          <ImageHistory />
+          <ImageHistory imglist = {imglist}/>
         </Grid.Column>
       </Grid>
     </div>

@@ -3,32 +3,34 @@ import React, { useEffect, useState } from 'react';
 import { Item, Label, Dropdown, Progress } from 'semantic-ui-react';
 import log from 'electron-log';
 
-export default function ImageHistory(props: any) {
-  // const { imgList } = props;
+export default function ImageHistory(props) {
+  const { imglist } = props;
+  console.log(imglist);
+  console.log('fuc');
   const items = [
     {
       childKey: 0,
-      image: 'Images/WechatIMG856.jpeg',
-      header: 'Header',
-      description: 'Mask',
-      meta: 'Width',
-      extra: 'Height',
+      image: imglist[0],
+      // header: 'Header',
+      // description: 'Mask',
+      // meta: 'Width',
+      // extra: 'Height',
     },
     {
       childKey: 1,
-      image: 'Images/WechatIMG471.jpeg',
-      header: 'Header',
-      description: 'Mask',
-      meta: 'Width',
-      extra: 'Height',
+      image: imglist[1],
+      // header: 'Header',
+      // description: 'Mask',
+      // meta: 'Width',
+      // extra: 'Height',
     },
     {
       childKey: 2,
-      image: 'Images/WechatIMG509.jpeg',
-      header: 'Mask',
-      description: 'Frame',
-      meta: 'Width',
-      extra: 'Height',
+      image: imglist[2],
+      // header: 'Mask',
+      // description: 'Frame',
+      // meta: 'Width',
+      // extra: 'Height',
     },
   ];
 
