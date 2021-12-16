@@ -6,7 +6,6 @@ import log from 'electron-log';
 export default function ImageHistory(props) {
   const { imglist } = props;
   console.log(imglist);
-  console.log('fuc');
   const items = [
     {
       childKey: 0,

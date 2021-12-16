@@ -16,6 +16,8 @@ export default function AnnotationDisplay(props) {
   const {
     annotation, Annotations, imgIdx
   } = props;
+  // console.log("Annotations: ", Annotations.length);
+  // console.log("imgIdx: ", imgIdx.length);
   const [open, setOpen] = useState(false);  // modal window control
   // tag status in tag header
   const tagHeader = () => annotation.confidence === -100 ? 'Deleted' : `${annotation.category} with confidence: ${annotation.confidence}`;

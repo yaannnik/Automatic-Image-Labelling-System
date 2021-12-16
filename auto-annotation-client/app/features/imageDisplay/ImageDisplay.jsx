@@ -96,7 +96,7 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
       setCandidate([new AnnotationItem('', [], -100)]);
       imgIdx.length = 0;
       response.data.annotation.map((annotationNew) => {
-        const id = imgIdx.length == 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
+        const id = imgIdx.length === 0 ? 0 : imgIdx[imgIdx.length - 1] + 1;
         imgUpdated.annotation.push(new AnnotationItem(
                                   annotationNew.category,
                                   annotationNew.bbox,
@@ -107,14 +107,14 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
                       id);
         // record id
         imgIdx.push(id);
-        // log.info(imgUpdated);
-        setAnnotation(imgUpdated.annotation);
-        setImgUpdated(imgUpdated);
-        log.info('add imgannotation from request');
-        log.info(imgAnnotation);
-        log.info(imgIdx);
         return response;
       });
+      // log.info(imgUpdated);
+      setAnnotation(imgUpdated.annotation);
+      setImgUpdated(imgUpdated);
+      log.info('add imgannotation from request');
+      log.info(imgAnnotation);
+      log.info(imgIdx);
     }).catch(error => {
       log.info(error);
     });
