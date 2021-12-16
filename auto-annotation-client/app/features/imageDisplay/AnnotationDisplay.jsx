@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 // debug console output
 import log from 'electron-log';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon, Label, Card, Popup, Modal, Button } from 'semantic-ui-react';
 
 // internal components
@@ -27,6 +27,10 @@ export default function AnnotationDisplay(props) {
 
     return 'red';
   };
+  useEffect(() => {
+    console.log('add label');
+    console.log(annotation);
+  }, []);
   // tag info in tag popup
   const tagDesc = () => {
     const content = (

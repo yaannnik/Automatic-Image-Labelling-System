@@ -18,7 +18,7 @@ export default function imageHome() {
   const panes = [
     { menuItem: 'Home', render: () => <Tab.Pane>{<ImageDisplay imgData={AppDataInfo} user={user} />}</Tab.Pane> },
     { menuItem: 'Login', render: () => <Tab.Pane>{<Login setUser={setUser} />}</Tab.Pane> },
-    { menuItem: 'Settings', render: () => <Tab.Pane>{<SettingsForm />}</Tab.Pane> },
+    { menuItem: 'Settings', render: () => <Tab.Pane>{<SettingsForm user={user} />}</Tab.Pane> },
   ];
 
   return (

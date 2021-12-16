@@ -46,7 +46,7 @@ import ImgService from '../../utils/getService';
 import AnnotationItem from '../../dataStructure/AnnotationItem';
 import AnnotationDisplay from './AnnotationDisplay';
 
-export default function AppIcon(props: { imgData: [], user: string }) {
+export default function ImageDisplay(props: { imgData: [], user: string }) {
   // connection between front end and back end
   const { imgData, user } = props;
   const [open, setOpen] = useState(false);
@@ -101,14 +101,13 @@ export default function AppIcon(props: { imgData: [], user: string }) {
         // log.info(imgUpdated);
         setAnnotation(imgUpdated.annotation);
         setImgUpdated(imgUpdated);
-        log.info("add imgannotation from request");
+        log.info('add imgannotation from request');
         log.info(imgAnnotation);
         log.info(imgIdx);
         return response;
-      })
-      .catch(error => {
-        log.info(error);
       });
+    }).catch(error => {
+      log.info(error);
     });
   };
   const onSubmitChange = () => {
@@ -148,7 +147,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
         // record id
         imgIdx.push(id);
       }
-      log.info("add imgannotation from frame");
+      log.info('add imgannotation from frame');
       log.info(imgAnnotation);
       log.info(imgIdx);
     });
@@ -180,7 +179,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
           // record id
         imgIdx.push(id);
       }  // drop duplicate
-      log.info("add imgannotation from dropdown");
+      log.info('add imgannotation from dropdown');
       log.info(imgAnnotation);
       log.info(imgIdx);
     }
@@ -191,7 +190,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
     if (imgItem.confidence !== -1) {
       log.info('delete existed annotation: ', imgItem);
       const index = imgAnnotation.indexOf(imgItem);
-      log.info("delete imgannotation from dropdown");
+      log.info('delete imgannotation from dropdown');
       log.info(index);
       log.info(imgIdx[index]);
       if (index !== -1) {
@@ -299,6 +298,7 @@ export default function AppIcon(props: { imgData: [], user: string }) {
                         annotation={annotation}
                         Annotations={imgAnnotation}
                         imgIdx={imgIdx}
+                        key={annotation.bbox}
                       />
                     ))}
                   </Grid.Column>
