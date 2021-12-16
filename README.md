@@ -1,4 +1,4 @@
-# E6893-final-project
+# E6893-final-project: Automatic Image Labelling System
 Final Project of ELEN6893@Columbia University: Automatic Image Labelling System
 - author: [Yi Yang](https://github.com/yaannnik), [Jiashu Chen](https://github.com/Jiashu0326), [Jing Peng](https://github.com/paterlisia)
 
@@ -62,3 +62,31 @@ To use your unique model and settings, sign up/login with your account first.
 Upload your customized config file and model to label your data via our settings panel.
 
 <img src="./figures/settings.png" alt="Settings" style="zoom:40%;" />
+
+
+
+### Label your image
+
+After login and upload your model and config file, you can now use our system to label your images. Click on 'Open' to select your image and then click on 'Upload' to send your image to our backend.
+
+<img src="./figures/upload.png" alt="Upload" style="zoom:40%;" />
+
+
+
+### Make your modifications
+
+You can make modifications including adding, updating or removing annotations to your label results. Operations in the Display panel and Option are both supported.
+
+<img src="./figures/modification.png" alt="Modification" style="zoom:40%;" />
+
+
+
+## Update your model
+
+If you wold like to update your model to improve model's performance, [Airflow](https://airflow.apache.org/) is needed to support periodically training. Details of our periodically training can be found in [airflow-utils](./airflow-utils). Put all the files into your `$AIRFLOW_HOME/dags`.
+
+
+
+## Acknowledgement
+
+This work is the final project for EECS-E6893@Columbia University.
