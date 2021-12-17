@@ -47,7 +47,7 @@ import AnnotationItem from '../../dataStructure/AnnotationItem';
 import AnnotationDisplay from './AnnotationDisplay';
 
 
-var imglist = {};
+const imglist = {};
 
 export default function ImageDisplay(props: { imgData: [], user: string }) {
   // connection between front end and back end
@@ -107,13 +107,13 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
         // record id
         imgIdx.push(id);
         // log.info(imgUpdated);
-        setAnnotation(imgUpdated.annotation);
-        setImgUpdated(imgUpdated);
-        log.info('add imgannotation from request');
-        log.info(imgAnnotation);
-        log.info(imgIdx);
         return response;
       });
+      setAnnotation(imgUpdated.annotation);
+      setImgUpdated(imgUpdated);
+      log.info('add imgannotation from request');
+      log.info(imgAnnotation);
+      log.info(imgIdx);
     }).catch(error => {
       log.info(error);
     });
@@ -333,7 +333,7 @@ export default function ImageDisplay(props: { imgData: [], user: string }) {
           </div>
         </Grid.Column>
         <Grid.Column computer={4} largeScreen={4} widescreen={4}>
-          <ImageHistory imglist = {imglist}/>
+          <ImageHistory imglist={imglist} />
         </Grid.Column>
       </Grid>
     </div>
