@@ -47,6 +47,7 @@ export default class UploadModal extends Component {
     const { file } = this.state;
     const { user } = this.props;
     this.setState({ fileUpload: true });
+    console.log(user);
     exec(`cp ${file.path} $PWD/../auto-annotation-server/users/${user}/config`);
   };
 

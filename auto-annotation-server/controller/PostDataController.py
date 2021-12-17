@@ -52,7 +52,8 @@ def postData():
             "line_color": None,
             "fill_color": None,
             "label": anno["category"],
-            "points": [[anno["bbox"][0], anno["bbox"][1]], [anno["bbox"][2], anno["bbox"][3]]],
+            "points": [[ int(anno["bbox"][0]), int(anno["bbox"][1]) ], \
+                [ int(anno["bbox"][2]), int(anno["bbox"][3]) ]],
             "group_id": None,
             "shape_type": "rectangle",
             "flags": {}

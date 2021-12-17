@@ -90,7 +90,7 @@ export default function Login(props) {
     <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-          <Image src="data/logos/login.jpeg" size="huge" /> Log-in to your account
+          <Image src="./Images/logo.png" size="huge" /> Log-in to your account
         </Header>
         <Form size="large">
           <Segment stacked>

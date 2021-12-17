@@ -114,7 +114,7 @@ export default function UserInfo() {
         <Grid textAlign="center" style={{ height: '50' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              <Image src="data/logos/login.jpeg" size="huge" /> Sign-up a new account
+              <Image src="./Images/signup.png" size="huge" /> Sign-up a new account
             </Header>
             <Form size="large">
               <Segment stacked>
