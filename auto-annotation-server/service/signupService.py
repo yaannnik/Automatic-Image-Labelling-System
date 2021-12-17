@@ -11,19 +11,23 @@ class signupService:
 
     def add_account(self):
         path = r'../users/'
-        os.mkdir(path + self.User.name)
+        if not os.path.exists(path + self.User.name):
+            os.mkdir(path + self.User.name)
 
     def add_model(self):
         path = r'../users/'
-        os.mkdir(path + self.User.name + "/model")
+        if not os.path.exists(path + self.User.name + "/model"):
+            os.mkdir(path + self.User.name + "/model")
 
     def add_json(self):
         path = r'../users/'
-        os.mkdir(path + self.User.name + "/data")
+        if not os.path.exists(path + self.User.name + "/data"):        
+            os.mkdir(path + self.User.name + "/data")
 
     def add_config(self):
         path = r'../users/'
-        os.mkdir(path + self.User.name + "/config")
+        if not os.path.exists(path + self.User.name + "/config"):
+            os.mkdir(path + self.User.name + "/config")
 
     def signup(self):
         self.add_account()
