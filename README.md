@@ -2,6 +2,8 @@
 Final Project of ELEN6893@Columbia University: Automatic Image Labelling System
 - author: [Yi Yang](https://github.com/yaannnik), [Jiashu Chen](https://github.com/Jiashu0326), [Jing Peng](https://github.com/paterlisia)
 
+<img src="./figures/upload.png" alt="Page" style="zoom:40%;" />
+
 ## Installation
 
 ### Requirements
@@ -53,7 +55,7 @@ Use [start-frontend.sh](start-frontend.sh) and [start-backend.sh](start-backend.
 
 To use your unique model and settings, sign up/login with your account first.
 
-<img src="./figures/login.png" alt="Login" style="zoom:40%;" />
+<img src="./figures/login.gif" alt="Login" style="zoom:40%;" />
 
 
 
@@ -61,7 +63,7 @@ To use your unique model and settings, sign up/login with your account first.
 
 Upload your customized config file and model to label your data via our settings panel.
 
-<img src="./figures/settings.png" alt="Settings" style="zoom:40%;" />
+<img src="./figures/settings.gif" alt="Settings" style="zoom:40%;" />
 
 
 
@@ -69,7 +71,7 @@ Upload your customized config file and model to label your data via our settings
 
 After login and upload your model and config file, you can now use our system to label your images. Click on 'Open' to select your image and then click on 'Upload' to send your image to our backend.
 
-<img src="./figures/upload.png" alt="Upload" style="zoom:40%;" />
+<img src="./figures/upload.gif" alt="Upload" style="zoom:40%;" />
 
 
 
@@ -77,9 +79,17 @@ After login and upload your model and config file, you can now use our system to
 
 You can make modifications including adding, updating or removing annotations to your label results. Operations in the Display panel and Option are both supported.
 
-<img src="./figures/modification.png" alt="Modification" style="zoom:40%;" />
+You can update your annotations:
 
+<img src="./figures/update.gif" alt="Update" style="zoom:40%;" />
 
+You can add new annotations:
+
+<img src="./figures/add.gif" alt="Add" style="zoom:40%;" />
+
+You can remove unwanted/wrong annotations:
+
+<img src="./figures/delete.gif" alt="Delete" style="zoom:40%;" />
 
 ## Update your model
 
